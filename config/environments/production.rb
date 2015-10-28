@@ -14,6 +14,9 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  # Added for Devise via the instructions it provided me in my shell after install
+  config.action_mailer.default_url_options = { host: 'when I push to Heroku, I need to replace this string with the full url. Not sure if I need to include the http:// or not...' }
+
   # Enable Rack::Cache to put a simple HTTP cache in front of your application
   # Add `rack-cache` to your Gemfile before enabling this.
   # For large-scale production use, consider using a caching reverse proxy like
