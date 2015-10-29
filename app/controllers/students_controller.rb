@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   before_action :set_group
-  before_action :set_student, only: [:edit, :update, :destroy]
+  before_action :set_student, only: [:update, :destroy]
   before_action :set_all_students_in_group_by_last_name
 
   def index
@@ -35,13 +35,16 @@ class StudentsController < ApplicationController
     # save to Separation class
   end
 
-  def edit
+  def roster_edit
+    @group = Group.find(params[:group_id])
   end
 
   def update
+    binding.pry
   end
 
   def destroy
+    binding.pry
   end
 
   private

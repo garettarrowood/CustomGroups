@@ -7,6 +7,4 @@
   <% end %>
 </ul>
 
-<!-- eventually add buttons/links next to each student in about list that update or delete them from the roster -->
-
-<%= link_to "Add another student to roster", new_group_student_path(@group) %>
+<%= link_to "Edit Roster", group_students_roster_edit_path(@group) %>

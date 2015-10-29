@@ -1,0 +1,39 @@
+
+<h3>Class Roster</h3>
+<ul>
+  <% @students.each do |student| %>
+    <%= form_for [@group, student] do |f| %>
+
+      <% if student.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(student.errors.count, "error") %>
+            prohibited this student from being saved:</h2>
+          <ul>
+          <% student.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <li>
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name %>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name %>
+        <% if student.gender == 'male' %>
+          Female: <%= f.radio_button :gender, "female" %>
+          Male: <%= f.radio_button :gender, "male", checked: true %>
+        <% else %>
+          Female: <%= f.radio_button :gender, "female", checked: true %>
+          Male: <%= f.radio_button :gender, "male" %>
+        <% end %>
+        <%= f.submit "Save change" %>
+        <%= button_to "Remove student", group_student_path(@group, student), method: :delete %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<%= link_to "Add another student to roster", new_group_student_path(@group) %><br>
+<%= link_to "Back", group_path(@group) %>
