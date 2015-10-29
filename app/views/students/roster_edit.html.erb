@@ -32,7 +32,7 @@
           <td>Female: <%= f.radio_button :gender, "female", checked: true %>
           Male: <%= f.radio_button :gender, "male" %></td>
         <% end %>
-        <td><%= f.submit "Save change" %><td>
+        <td><%= button_to "Save change", group_student_path(@group, student), method: :patch %><td>
         <td><%= button_to "Remove student", group_student_path(@group, student), method: :delete %></td>
       </tr>
     <% end %>

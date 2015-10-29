@@ -40,7 +40,13 @@ class StudentsController < ApplicationController
   end
 
   def update
-    binding.pry
+    if @student.update(student_params)
+      flash[:notice] = "#{@student.first_name} #{@student.last_name} updated."
+      redirect_to group_students_roster_edit_path(@group)
+    else
+      flash[:alert] = "Unable to update"
+      render action: 'roster_edit'
+    end
   end
 
   def destroy
