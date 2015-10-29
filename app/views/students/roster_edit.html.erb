@@ -10,18 +10,6 @@
   <% @students.each_with_index do |student, i| %>
     <tr>
       <%= form_for [@group, student] do |f| %>
-        <% if student.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(student.errors.count, "error") %>
-              prohibited this student from being saved:</h2>
-            <ul>
-            <% student.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-            </ul>
-          </div>
-        <% end %>
-
         <td><%= f.text_field :first_name %></td>
         <td><%= f.text_field :last_name %></td>
         <td><select name="student[gender]" id="<%= i %>"><option value="male" <%= student.gender == 'male' ? "selected='selected'" : "" %>>Male</option><option value="female" <%= student.gender == 'female' ? "selected='selected'" : "" %>>Female</option></select></td>
