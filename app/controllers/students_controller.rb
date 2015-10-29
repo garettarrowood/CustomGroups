@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_group
   before_action :set_student, only: [:edit, :update, :destroy]
-  before_action :set_all_students_in_group
+  before_action :set_all_students_in_group_by_last_name
 
   def index
     # shows class roster - Class settings - CRUD operations on students, can also add exceptions, should ALSO be able to view full roster here
@@ -61,7 +61,7 @@ class StudentsController < ApplicationController
       @student = @group.students.find(params[:id])
     end
 
-    def set_all_students_in_group
+    def set_all_students_in_group_by_last_name
       @students = @group.students.sort { |a,b| a.last_name.downcase <=> b.last_name.downcase }
     end
 
