@@ -1,11 +1,13 @@
+<h1><%= @group.title %></h1>
+
 <h2>Add student:</h2>
 
 <%= render 'form' %>
 
-<h3>Current unordered roster:</h3>
+<h3>Current roster:</h3>
 
 <ul>
-  <% @group.students.sort.each do |student| %>
+  <% @students.each do |student| %>
     <li><%= student.last_name %>, <%= student.first_name %></li>
   <% end %>
 </ul>

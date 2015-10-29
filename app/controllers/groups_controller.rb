@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_all_students_in_group, only: [:show, :edit, :update, :destroy]
 
   def index
     # From home page, you select a group or create a group
@@ -52,6 +53,10 @@ class GroupsController < ApplicationController
 
     def group_params
       params.require(:group).permit(:title)
+    end
+
+    def set_all_students_in_group
+      @students = @group.students.sort { |a,b| a.last_name.downcase <=> b.last_name.downcase }
     end
 
 end
