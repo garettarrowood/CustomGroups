@@ -1,6 +1,12 @@
 
 <h3>Class Roster</h3>
-<ul>
+<table>
+  <tr>
+    <th>First</th>
+    <th>Last</th>
+    <th>Gender</th>
+    <th colspan="2"></th>
+  </tr>
   <% @students.each do |student| %>
     <%= form_for [@group, student] do |f| %>
 
@@ -16,24 +22,22 @@
         </div>
       <% end %>
 
-      <li>
-        <%= f.label :first_name %>
-        <%= f.text_field :first_name %>
-        <%= f.label :last_name %>
-        <%= f.text_field :last_name %>
+      <tr>
+        <td><%= f.text_field :first_name %></td>
+        <td><%= f.text_field :last_name %></td>
         <% if student.gender == 'male' %>
-          Female: <%= f.radio_button :gender, "female" %>
-          Male: <%= f.radio_button :gender, "male", checked: true %>
+          <td>Female: <%= f.radio_button :gender, "female" %>
+          Male: <%= f.radio_button :gender, "male", checked: true %></td>
         <% else %>
-          Female: <%= f.radio_button :gender, "female", checked: true %>
-          Male: <%= f.radio_button :gender, "male" %>
+          <td>Female: <%= f.radio_button :gender, "female", checked: true %>
+          Male: <%= f.radio_button :gender, "male" %></td>
         <% end %>
-        <%= f.submit "Save change" %>
-        <%= button_to "Remove student", group_student_path(@group, student), method: :delete %>
-      </li>
+        <td><%= f.submit "Save change" %><td>
+        <td><%= button_to "Remove student", group_student_path(@group, student), method: :delete %></td>
+      </tr>
     <% end %>
   <% end %>
-</ul>
+</table>
 
-<%= link_to "Add another student to roster", new_group_student_path(@group) %><br>
+<%= link_to "Add another student", new_group_student_path(@group) %><br>
 <%= link_to "Back", group_path(@group) %>
