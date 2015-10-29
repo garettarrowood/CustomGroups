@@ -1,1 +1,8 @@
-You've reach the group show page.
+<h2><%= @group.title %> show page</h2>
+
+<h3>Unordered Roster</h3>
+<ul>
+  <% @group.students.sort.each do |student| %>
+    <li><%= student.last_name %>, <%= student.first_name %></li>
+  <% end %>
+</ul>

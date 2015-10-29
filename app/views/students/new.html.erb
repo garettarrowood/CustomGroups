@@ -2,4 +2,11 @@
 
 <%= render 'form' %>
 
-<br>Group should be rendered in a before action and kept as an instance variable in the controller.<br>
+<h3>Current unordered roster:</h3>
+
+<ul>
+  <% @group.students.sort.each do |student| %>
+    <li><%= student.last_name %>, <%= student.first_name %></li>
+  <% end %>
+</ul>
+
