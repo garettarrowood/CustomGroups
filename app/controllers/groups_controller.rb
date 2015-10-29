@@ -7,7 +7,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-    # main class page - From “group” page, can view entire students roster, can click to add student (or adjust roster), (mass assignment, or click to add one more - either way, should be able to view class as you add), and can click to choose to generate random groups, can click "class settings" (or adjust roster)
+    # still to set up - click to choose to generate random groups, class settings link to setting up seperations
   end
 
   def new
