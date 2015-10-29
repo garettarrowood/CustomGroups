@@ -3,10 +3,6 @@ class StudentsController < ApplicationController
   before_action :set_student, only: [:update, :destroy]
   before_action :set_all_students_in_group_by_last_name
 
-  def index
-    # shows class roster - Class settings - CRUD operations on students, can also add exceptions, should ALSO be able to view full roster here
-  end
-
   def new
     @student = Student.new
   end
@@ -36,7 +32,6 @@ class StudentsController < ApplicationController
   end
 
   def roster_edit
-    @group = Group.find(params[:group_id])
   end
 
   def update

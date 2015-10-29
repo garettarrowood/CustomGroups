@@ -7,7 +7,7 @@
     <th>Gender</th>
     <th colspan="2"></th>
   </tr>
-  <% @students.each do |student| %>
+  <% @students.each_with_index do |student, i| %>
     <%= form_for [@group, student] do |f| %>
 
       <% if student.errors.any? %>
@@ -25,13 +25,7 @@
       <tr>
         <td><%= f.text_field :first_name %></td>
         <td><%= f.text_field :last_name %></td>
-        <% if student.gender == 'male' %>
-          <td>Female: <%= f.radio_button :gender, "female" %>
-          Male: <%= f.radio_button :gender, "male", checked: true %></td>
-        <% else %>
-          <td>Female: <%= f.radio_button :gender, "female", checked: true %>
-          Male: <%= f.radio_button :gender, "male" %></td>
-        <% end %>
+        <td><select name="<%= i %>" id="<%= i %>"><option value="male" <%= student.gender == 'male' ? "selected='selected'" : "" %>>Male</option><option value="female" <%= student.gender == 'female' ? "selected='selected'" : "" %>>Female</option></select></td>
         <td><%= button_to "Save change", group_student_path(@group, student), method: :patch %><td>
         <td><%= button_to "Remove student", group_student_path(@group, student), method: :delete %></td>
       </tr>
@@ -41,5 +35,6 @@
 
 <%= link_to "Add another student", new_group_student_path(@group) %><br>
 <%= link_to "Back", group_path(@group) %>
+
 
 <!-- class settings link that leads to setting up separations -->
