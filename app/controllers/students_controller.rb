@@ -44,7 +44,9 @@ class StudentsController < ApplicationController
   end
 
   def destroy
-    binding.pry
+    @student.destroy
+    flash[:alert] = "#{@student.first_name} #{@student.last_name} has been removed from your roster."
+    redirect_to group_students_roster_edit_path(@group)
   end
 
   private
