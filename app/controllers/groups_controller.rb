@@ -13,7 +13,14 @@ class GroupsController < ApplicationController
   end
 
   def create
-    # save group
+    @group = Group.new(group_params)
+
+    if @group.save
+      redirect_to new_group_student_path(@group)
+    else
+      flash[:alert] = "Class needs to have a title"
+      render "new"
+    end
   end
 
   def edit
@@ -35,5 +42,11 @@ class GroupsController < ApplicationController
   def grouping
     # takes #small_groups data and generates groups, renders a page with links back to other stuff
   end
+
+  private 
+
+    def group_params
+      params.require(:group).permit(:title)
+    end
 
 end

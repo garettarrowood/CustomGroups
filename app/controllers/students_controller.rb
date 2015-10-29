@@ -5,11 +5,12 @@ class StudentsController < ApplicationController
   end
 
   def new
-    # single/mass assignment of student creation
+    @group = Group.find(params[:group_id])
+    @student = Student.new
   end
 
   def create
-    # save new student(s)
+    # save new student - redirect to the right place based on commit
   end
 
   def separation

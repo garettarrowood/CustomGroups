@@ -3,7 +3,13 @@
 <p>Select a class:</p>
 
 <% if Group.first == nil %>
-  <p>Create a class to get started.</p>
+  <a href='/groups/new'><p>Create a class to get started.</p></a>
+<% else %>
+  <ul>
+    <% Group.all.each do |group| %>
+      <li><%= link_to group.title, group %></li>
+    <% end %>
+  </ul><br>
+  <a href='/groups/new'><p>Add another class.</p></a>
 <% end %>
 
-<p>Place button here to create group</p>
