@@ -1,18 +1,18 @@
 
 <h3>Class Roster</h3>
-  <ul>
-    <% @students.each_with_index do |student, i| %>
-      <%= form_for [@group, student] do |f| %>
-        <li>First:<%= f.text_field :first_name %>
-        Last:<%= f.text_field :last_name %>
-        <%= f.select :gender, [['Male', 'male'], ['Female', 'female']] %>
-        <%= f.submit "Save change" %>
-      <% end %>
-      <%= button_to "Remove student", group_student_path(@group, student), method: :delete %></li>
+<ul>
+  <% @students.each_with_index do |student, i| %>
+    <%= form_for [@group, student] do |f| %>
+      <li>First:<%= f.text_field :first_name %>
+      Last:<%= f.text_field :last_name %>
+      <%= f.select :gender, [['Male', 'male'], ['Female', 'female']] %>
+      <%= f.submit "Save change" %>
     <% end %>
-  </ul>
+    <%= button_to "Remove student", group_student_path(@group, student), method: :delete %></li>
+  <% end %>
+</ul>
 
-<%= link_to "Add another student", new_group_student_path(@group) %><br>
+<%= link_to "Add more students", new_group_student_path(@group) %><br>
 <%= link_to "Back", group_path(@group) %>
 
 

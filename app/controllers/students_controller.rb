@@ -23,14 +23,6 @@ class StudentsController < ApplicationController
     end
   end
 
-  def separation
-    # explain how exceptions always apply to random generation - Exception selection form - dropdown menu to choose two students from same class
-  end
-
-  def add_separation
-    # save to Separation class
-  end
-
   def roster_edit
   end
 

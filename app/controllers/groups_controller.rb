@@ -1,9 +1,8 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
-  before_action :set_all_students_in_group_by_last_name, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :small_groups]
+  before_action :set_all_students_in_group_by_last_name, only: [:show, :edit, :update, :destroy, :small_groups]
 
   def index
-    # From home page, you select a group or create a group
   end
 
   def show
@@ -37,11 +36,17 @@ class GroupsController < ApplicationController
   end
 
   def small_groups
-    # From random generation page, can specify how many groups you want, and whether they should be required to be mixed gender (exceptions always apply, but DO NOT remind user here) - SO THIS PAGE DISPLAYS FORM
   end
 
   def grouping
     # takes #small_groups data and generates groups, renders a page with links back to other stuff
+  end
+
+  def class_settings
+  end
+
+  def add_separation
+    # save to Separation class
   end
 
   private 
