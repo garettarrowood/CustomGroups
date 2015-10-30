@@ -1,3 +1,9 @@
 
-<%= Randomizer.display %><br><br>
+<% i=1 %>
+<% @final_groups = Randomizer.display %>
+<% Randomizer.number.to_i.times do %>
+  <h4>Group <%= i %></h4>
+  <%= @final_groups["#{i}"] %><br>
+  <% i += 1 %>
+<% end %><br>
 

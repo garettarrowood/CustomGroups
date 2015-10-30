@@ -15,14 +15,14 @@ class Randomizer
 
     def set_random_groups
       @subgroups = {}
-      i=1
       base_group_size = @students.length / @number.to_i
-      leftovers = @students.length % @number.to_i
+      i=1
       @number.to_i.times do
         @subgroups["#{i}"] = @full_names[0...base_group_size]  
         i += 1  
         @full_names = @full_names.drop(base_group_size)
       end
+      leftovers = @students.length % @number.to_i
       i=1
       leftovers.times do
         @subgroups["#{i}"] << @full_names[0]
@@ -52,9 +52,6 @@ class Randomizer
       set_random_groups
       @subgroups
     end
-
-
-
   end
 
 end
