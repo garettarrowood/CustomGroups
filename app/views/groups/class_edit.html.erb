@@ -1,3 +1,12 @@
-Edit page - display classes, add ability to edit name or delete.
+<h2>All your classes</h2>
+<ul>
+  <% current_user.groups.each do |group| %>
+    <%= form_for (group) do |f| %>
+      <li><%= f.text_field :title %>
+      <%= f.submit "Save Change" %>
+    <% end %>
+    <%= button_to "Remove class", group_path(group), method: :delete, data: { confirm: "Are you sure you want to delete this class for good?" } %></li>
+  <% end %>
+</ul>
 
-<br><a href="/groups">Back</a>
+<a href="/groups">Back</a>

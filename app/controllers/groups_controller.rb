@@ -26,11 +26,19 @@ class GroupsController < ApplicationController
   end
 
   def update
-    # save new group titles
+    if @group.update(group_params)
+      flash[:notice] = "#{@group.title} updated."
+      redirect_to :class_edit
+    else
+      flash[:alert] = "Unable to update"
+      render action: 'class_edit'
+    end
   end
 
   def destroy
-    # delete group
+    @group.destroy
+    flash[:alert] = "#{@group.title} has been deleted."
+    redirect_to groups_path
   end
 
   def small_groups

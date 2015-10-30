@@ -1,12 +1,12 @@
 
 <h3>Class Roster</h3>
 <ul>
-  <% @students.each_with_index do |student, i| %>
+  <% @students.each do |student| %>
     <%= form_for [@group, student] do |f| %>
       <li>First:<%= f.text_field :first_name %>
       Last:<%= f.text_field :last_name %>
       <%= f.select :gender, [['Male', 'male'], ['Female', 'female']] %>
-      <%= f.submit "Save change" %>
+      <%= f.submit "Save Change" %>
     <% end %>
     <%= button_to "Remove student", group_student_path(@group, student), method: :delete %></li>
   <% end %>
