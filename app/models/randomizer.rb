@@ -71,10 +71,16 @@ class Randomizer
 
     def display
       get_randomized_students
+      if @gender_specific == "whatever it is supposed to equal"
+        #run gender randomizer
+      end
       set_full_names
       set_random_groups
       @subgroups
     end
+
+    #DONT FORGET TO FIX MAX option ON NUMBER_FIELD_TAG IN HTML view
+    
   end
 
 end
