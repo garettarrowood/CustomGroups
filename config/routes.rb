@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'application#main'
 
   authenticate :user do
+    get '/groups/class_edit', to: "groups#class_edit", as: 'class_edit'
     resources :groups do
       get 'students/roster_edit', to: "students#roster_edit"
       resources :students
