@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :students, except: [:index, :show, :edit]
     end
     get '/groups/:id/small_groups', to: "groups#small_groups", as: "small_groups"
+    post '/groups/:id/grouping', to: "groups#grouping"
     get '/groups/:id/class_settings', to: "groups#class_settings", as: "class_settings"
   end
 

@@ -1,3 +1,10 @@
-Random generation page - can specify how many groups you want, and whether they should be required to be mixed gender (exceptions always apply, but DO NOT remind user here) - SO THIS PAGE DISPLAYS another FORM
+<%= form_tag("/groups/#{@group.id}/grouping") do %>
+  <%= label_tag 'Number of groups' %> 
+  <%= number_field_tag 'number', nil, min: 2, max: ("#{@group.students.length}".to_i+1)/2 %><br>
+  Gender specific groups:<%= check_box_tag 'gender_specific' %><br>
+  <%= submit_tag 'Create random groups' %>
+<% end %>
 
-<br><%= link_to "Back", group_path %>
+<p>Display randomization below, with prompt that user can randomize once again.
+</p>
+<%= link_to "Back", group_path %> 
