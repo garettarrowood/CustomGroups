@@ -1,6 +1,6 @@
 <%= form_tag("/groups/#{@group.id}/grouping") do %>
   <%= label_tag 'Number of groups' %> 
-  <%= number_field_tag 'number', nil, min: 2, max: ("#{@group.students.length}".to_i+1)/2 %><br>
+  <%= number_field_tag 'number', nil, min: 2, max: @max %><br>
   Gender specific groups:<%= check_box_tag 'gender_specific' %>(not yet setup)<br>
   <%= submit_tag 'Create random groups' %>
 <% end %>

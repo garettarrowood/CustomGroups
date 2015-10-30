@@ -79,8 +79,6 @@ class Randomizer
       @subgroups
     end
 
-    #DONT FORGET TO FIX MAX option ON NUMBER_FIELD_TAG IN HTML view
-    
   end
 
 end

@@ -42,6 +42,7 @@ class GroupsController < ApplicationController
   end
 
   def small_groups
+    @max = (@group.students.length / 2) > 2 ? (@group.students.length / 2) : 2
   end
 
   def grouping
