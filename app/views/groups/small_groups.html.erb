@@ -2,7 +2,7 @@
   <%= label_tag 'Number of groups' %> 
   <%= number_field_tag 'number', nil, min: 2, max: @max %><br>
   <%= submit_tag 'Create random groups' %>
-<% end %><br><br>
+<% end %><br>
 
 <% if Randomizer.group_id == @group.id %>
   <%= render 'subgroups' %>
