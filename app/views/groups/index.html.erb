@@ -2,11 +2,11 @@
 
 <p>Select a class:</p>
 
-<% if Group.first == nil %>
+<% if current_user.groups.first == nil %>
   <a href='/groups/new'><p>Create a class to get started.</p></a>
 <% else %>
   <ul>
-    <% Group.all.each do |group| %>
+    <% current_user.groups.each do |group| %>
       <li><%= link_to group.title, group %></li>
     <% end %>
   </ul><br>
