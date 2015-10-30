@@ -6,7 +6,6 @@ class GroupsController < ApplicationController
   end
 
   def show
-    # still to set up - click to choose to generate random groups, class settings link to setting up seperations
   end
 
   def new
@@ -27,7 +26,7 @@ class GroupsController < ApplicationController
   end
 
   def update
-    # save new group title
+    # save new group titles
   end
 
   def destroy
@@ -38,7 +37,7 @@ class GroupsController < ApplicationController
   end
 
   def grouping
-    # takes #small_groups data and generates groups, renders a page with links back to other stuff
+    # post action for #small_groups data - generates groups, renders back to small groups page
   end
 
   def class_settings
