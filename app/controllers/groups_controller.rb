@@ -42,13 +42,12 @@ class GroupsController < ApplicationController
   end
 
   def small_groups
-    @max = (@group.students.length / 2) > 2 ? (@group.students.length / 2) : 2
+    @max = ((@group.students.length + 1) / 2) > 2 ? ((@group.students.length + 1) / 2) : 2
   end
 
   def grouping
     Randomizer.group_id = @group.id
     Randomizer.number = params[:number]
-    Randomizer.gender_specific = params[:gender_specific]
     redirect_to "/groups/#{@group.id}/small_groups"
   end
 

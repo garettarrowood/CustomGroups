@@ -1,6 +1,6 @@
 class Randomizer
   class << self
-    attr_accessor :gender_specific, :number, :group_id
+    attr_accessor :number, :group_id
 
     def get_randomized_students
       group = Group.find(@group_id)
@@ -32,6 +32,7 @@ class Randomizer
     end
 
     def gender_seperator
+      # HIDE THIS FUNCTIONALITY IN CLASS SETTINGS
       # don't know how I'm going to handle this yet. Maybe sets boys and girls variables from randomized students. Probably has to run a pretty different randomization process to work... Fine.
     end
 
