@@ -5,6 +5,11 @@
   <%= submit_tag 'Create random groups' %>
 <% end %>
 
-<p>Display randomization below, with prompt that user can randomize once again.
+<p>Display randomization below (in a partial), with prompt that user can randomize once again.
 </p>
+
+<% if Randomizer.group_id == @group.id %>
+  <%= render 'subgroups' %>
+<% end %>
+
 <%= link_to "Back", group_path %> 

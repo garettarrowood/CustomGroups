@@ -45,7 +45,10 @@ class GroupsController < ApplicationController
   end
 
   def grouping
-    # post action for #small_groups data - generates groups, renders back to small groups page
+    Randomizer.group_id = @group.id
+    Randomizer.number = params[:number]
+    Randomizer.gender_specific = params[:gender_specific]
+    redirect_to "/groups/#{@group.id}/small_groups"
   end
 
   def class_settings
