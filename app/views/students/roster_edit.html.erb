@@ -13,7 +13,5 @@
 </ul>
 
 <%= link_to "Add more students", new_group_student_path(@group) %><br>
+<%= link_to "Class settings", "/groups/#{@group.id}/class_settings" %><br>
 <%= link_to "Back", group_path(@group) %>
-
-
-<!-- class settings link that leads to setting up separations -->
