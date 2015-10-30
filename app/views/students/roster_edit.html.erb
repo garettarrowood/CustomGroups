@@ -5,7 +5,7 @@
       <%= form_for [@group, student] do |f| %>
         <li>First:<%= f.text_field :first_name %>
         Last:<%= f.text_field :last_name %>
-        <select name="student[gender]" id="<%= i %>"><option value="male" <%= student.gender == 'male' ? "selected='selected'" : "" %>>Male</option><option value="female" <%= student.gender == 'female' ? "selected='selected'" : "" %>>Female</option></select>
+        <%= f.select :gender, [['Male', 'male'], ['Female', 'female']] %>
         <%= f.submit "Save change" %>
       <% end %>
       <%= button_to "Remove student", group_student_path(@group, student), method: :delete %></li>
