@@ -8,7 +8,7 @@
       <li><%= link_to group.title, group %></li>
     <% end %>
   </ul><br>
-  <a href='/groups/new'><h5>Add another class</h5></a>
-  <%= link_to "Edit or delete class", :class_edit %>
+  <%= link_to "Add Class", new_group_path %> | 
+  <%= link_to "Edit or Delete class", :class_edit %>
 <% end %>
 
