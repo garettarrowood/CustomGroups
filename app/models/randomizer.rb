@@ -57,6 +57,18 @@ class Randomizer
       end
     end
 
+    def gender_seperator
+      # don't know how I'm going to handle this yet. Maybe sets boys and girls variables from randomized students. Probably has to run a pretty different randomization process to work... Fine.
+    end
+
+    def separation_detector
+      # returns boolean of whether any special students need to be separated. In master opperation, when it returns false, then the class can output groups.
+    end
+
+    def separator
+      # handles swap of students that need separating.  This runs until separation_detector returns correct boolean value
+    end
+
     def display
       get_randomized_students
       set_full_names
@@ -64,7 +76,5 @@ class Randomizer
       @subgroups
     end
   end
-
-
 
 end
