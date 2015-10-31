@@ -3,4 +3,6 @@ class Group < ActiveRecord::Base
   has_many :separations, dependent: :delete_all
   belongs_to :user
 
+  attr_accessor :genderfied
+
 end

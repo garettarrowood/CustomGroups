@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20151028182155) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "title"
+    t.string   "genderfied"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

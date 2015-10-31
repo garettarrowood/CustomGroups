@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :update, :destroy, :small_groups, :grouping, :class_settings]
+  before_action :set_group, only: [:show, :update, :destroy, :small_groups, :grouping, :class_settings, :gender_setter]
   before_action :set_all_students_in_group_by_last_name, only: [:show, :edit, :update, :destroy, :small_groups]
 
   def index
@@ -41,6 +41,13 @@ class GroupsController < ApplicationController
     redirect_to groups_path
   end
 
+  def gender_setter
+    binding.pry
+    @group.update(group_params)
+    binding.pry
+    redirect_to "/groups/#{@group.id}/class_settings"
+  end
+
   def small_groups
     @max = ((@group.students.length + 1) / 2) > 2 ? ((@group.students.length + 1) / 2) : 2
   end
@@ -65,7 +72,7 @@ class GroupsController < ApplicationController
     end
 
     def group_params
-      params.require(:group).permit(:title)
+      params.require(:group).permit(:title, :genderfied)
     end
 
     def set_all_students_in_group_by_last_name

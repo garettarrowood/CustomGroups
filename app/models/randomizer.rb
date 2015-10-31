@@ -15,14 +15,14 @@ class Randomizer
 
     def set_random_groups
       @subgroups = {}
-      base_group_size = @students.length / @number.to_i
+      base_group_size = @full_names.length / @number.to_i
       i=1
       @number.to_i.times do
         @subgroups["#{i}"] = @full_names[0...base_group_size]  
         i += 1  
         @full_names = @full_names.drop(base_group_size)
       end
-      leftovers = @students.length % @number.to_i
+      leftovers = @full_names.length
       i=1
       leftovers.times do
         @subgroups["#{i}"] << @full_names[0]
@@ -31,7 +31,7 @@ class Randomizer
       end
     end
 
-    def gender_seperator
+    def gender_mixer
       # HIDE THIS FUNCTIONALITY IN CLASS SETTINGS
       # don't know how I'm going to handle this yet. Maybe sets boys and girls variables from randomized students. Probably has to run a pretty different randomization process to work... Fine.
     end

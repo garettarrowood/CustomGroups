@@ -1,3 +1,25 @@
-explain how separations always apply to random generation - Separation selection form - dropdown menu to choose two students from same class AND option to require all gender mixed groups (to the best of the roster's ability)
+<h2>Class Settings</h2>
+
+<p><strong>On this page you can set parameters for this group's randomization. These extra filters will NOT be displayed on any other page.</strong></p>
+
+<p>With this button checked, every randomization will create mixed gender groups. If your roster does not contain enough girls or boys for every group to be mixed, the program will spread out the minority gender as much as possible. This feature defaults to mixed, as studies show that mixed gender groups are better.</p>
+
+<%= form_tag("/groups/#{@group.id}/gender_setter", method: :put) do %>
+  <% if @group.genderfied == "mixed" %>
+    <%= check_box_tag "group[genderfied]", "mixed", true %>
+  <% else %>
+    <%= check_box_tag "group[genderfied]", "mixed" %>
+  <% end %>
+  <%= hidden_field_tag("group[title]", "#{@group.title}") %>
+  <%= submit_tag 'Save selection' %>
+<% end %>
+
+<P>You can also set pairs of students that should never be grouped together. Whether these students don't play well together, or they cause too much disruption to your class when around one another, this option will keep the randomizer from ever putting them in the same group.</p>
+
+
+
+
+
+Now add explain how separations always apply to random generation - Separation selection form - dropdown menu to choose two students from same class
 
 <br><%= link_to "Back", "/groups/#{@group.id}/students/roster_edit" %>
