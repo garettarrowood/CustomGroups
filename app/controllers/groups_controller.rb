@@ -42,9 +42,7 @@ class GroupsController < ApplicationController
   end
 
   def gender_setter
-    binding.pry
     @group.update(group_params)
-    binding.pry
     redirect_to "/groups/#{@group.id}/class_settings"
   end
 

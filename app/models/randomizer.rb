@@ -32,7 +32,6 @@ class Randomizer
     end
 
     def gender_mixer
-      # HIDE THIS FUNCTIONALITY IN CLASS SETTINGS
       # don't know how I'm going to handle this yet. Maybe sets boys and girls variables from randomized students. Probably has to run a pretty different randomization process to work... Fine.
     end
 

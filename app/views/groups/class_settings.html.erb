@@ -4,14 +4,10 @@
 
 <p>With this button checked, every randomization will create mixed gender groups. If your roster does not contain enough girls or boys for every group to be mixed, the program will spread out the minority gender as much as possible. This feature defaults to mixed, as studies show that mixed gender groups are better.</p>
 
-<%= form_tag("/groups/#{@group.id}/gender_setter", method: :put) do %>
-  <% if @group.genderfied == "mixed" %>
-    <%= check_box_tag "group[genderfied]", "mixed", true %>
-  <% else %>
-    <%= check_box_tag "group[genderfied]", "mixed" %>
-  <% end %>
-  <%= hidden_field_tag("group[title]", "#{@group.title}") %>
-  <%= submit_tag 'Save selection' %>
+<%= form_for :group, url: "/groups/#{@group.id}/gender_setter", method: :put do |f| %>
+  <%= f.check_box "genderfied" %>
+  <%= f.hidden_field "title" %>
+  <%= f.submit 'Save selection' %>
 <% end %>
 
 <P>You can also set pairs of students that should never be grouped together. Whether these students don't play well together, or they cause too much disruption to your class when around one another, this option will keep the randomizer from ever putting them in the same group.</p>
