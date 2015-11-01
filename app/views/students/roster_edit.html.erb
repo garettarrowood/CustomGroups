@@ -1,17 +1,25 @@
 
-<h3>Class Roster</h3>
-<ul>
-  <% @students.each do |student| %>
-    <%= form_for [@group, student] do |f| %>
-      <li>First:<%= f.text_field :first_name %>
-      Last:<%= f.text_field :last_name %>
-      <%= f.select :gender, [['Male', 'male'], ['Female', 'female']] %>
-      <%= f.submit "Save Change" %>
-    <% end %>
-    <%= button_to "Remove student", group_student_path(@group, student), method: :delete %></li>
-  <% end %>
-</ul>
+<h3 class="text-center">Class Roster</h3>
 
-<%= link_to "Add more students", new_group_student_path(@group) %> | 
-<%= link_to "Class settings", "/groups/#{@group.id}/class_settings" %> | 
-<%= link_to "Back", group_path(@group) %>
+<div class="row">
+  <div class="col-sm-12">
+    <% @students.each do |student| %>
+      <%= form_for [@group, student] do |f| %>
+        <%= f.label "First" %>
+        <%= f.text_field :first_name %>
+        <%= f.label "Last" %>
+        <%= f.text_field :last_name %>
+        <%= f.select :gender, [['Male', 'male'], ['Female', 'female']] %>
+        <%= f.submit "Save Change" %>
+      <% end %>
+      <%= button_to "Remove student", group_student_path(@group, student), method: :delete %>
+    <% end %>
+  </div>
+</div>
+
+<div class="navbar-text text-center">
+  <%= link_to "Add more students", new_group_student_path(@group) %> | 
+  <%= link_to "Class settings", "/groups/#{@group.id}/class_settings" %> | 
+  <%= link_to "Back", group_path(@group) %>
+</div>
+

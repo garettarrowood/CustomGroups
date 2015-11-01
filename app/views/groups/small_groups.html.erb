@@ -1,11 +1,15 @@
-<%= form_tag("/groups/#{@group.id}/grouping") do %>
-  <%= label_tag 'Number of groups' %> 
-  <%= number_field_tag 'number', nil, min: 2, max: @max %><br>
-  <%= submit_tag 'Create random groups' %>
-<% end %><br>
+<div class="col-xs-12 text-center">
+  <%= form_tag("/groups/#{@group.id}/grouping") do %>
+    <%= label_tag 'Number of groups' %> 
+    <%= number_field_tag 'number', nil, min: 2, max: @max %>
+    <%= submit_tag 'Create random groups' %>
+  <% end %>
+</div>
 
 <% if Randomizer.group_id == @group.id %>
   <%= render 'subgroups' %>
 <% end %>
 
-<%= link_to "Back", group_path %> 
+<div class="navbar-text col-xs-12">
+  <%= link_to "Back", group_path %> 
+</div>

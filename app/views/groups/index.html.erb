@@ -1,14 +1,15 @@
 <h2>All your classes</h2>
 
 <% if current_user.groups.first == nil %>
-  <a href='/groups/new'><p>None created yet. Click here to get started.</p></a>
+  <a href='/groups/new'><p>None classes created yet. Click here to get started.</p></a>
 <% else %>
-  <ul>
-    <% current_user.groups.each do |group| %>
-      <li><%= link_to group.title, group %></li>
-    <% end %>
-  </ul><br>
-  <%= link_to "Add Class", new_group_path %> | 
-  <%= link_to "Edit or Delete class", :class_edit %>
+  <% current_user.groups.each do |group| %>
+    <%= link_to group.title, group %><br>
+  <% end %>
+
+  <div class="navbar-text">
+    <%= link_to "Add Class", new_group_path %> | 
+    <%= link_to "Edit or Delete class", :class_edit %>
+  </div>
 <% end %>
 
