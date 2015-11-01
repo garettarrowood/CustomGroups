@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :update, :destroy, :small_groups, :grouping, :class_settings, :gender_setter]
-  before_action :set_all_students_in_group_by_last_name, only: [:show, :edit, :update, :destroy, :small_groups]
+  before_action :set_all_students_in_group_by_last_name, only: [:show, :edit, :update, :destroy, :small_groups, :class_settings]
 
   def index
   end
