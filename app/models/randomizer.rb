@@ -2,9 +2,23 @@ class Randomizer
   class << self
     attr_accessor :number, :group_id
 
-    def get_randomized_students
-      group = Group.find(@group_id)
-      @students = group.students.shuffle
+    def get_group
+      @group = Group.find(@group_id)
+    end
+
+    def set_genders
+      @girls = @group.students.select do |student|
+        student.gender == "female"  
+      end
+      @boys = @group.students.select do |student|
+        student.gender == "male"  
+      end
+    end
+
+    def find_balance
+      @minority = @boys.length < @girls.length ? @boys : @girls
+      @majority = @boys.length > @girls.length ? @boys : @girls
+      @students = @majority.shuffle
     end
 
     def set_full_names
@@ -13,7 +27,34 @@ class Randomizer
       end
     end
 
-    def set_random_groups
+    def spread_minority
+      @minority_names = @minority.shuffle.collect do |student|
+        "#{student.first_name} #{student.last_name}"
+      end
+      if @number.to_i < @minority_names.length
+        i=1
+        @number.to_i.times do
+          @subgroups["#{i}"] << @minority_names[0]
+          @minority_names = @minority_names.drop(1)
+          i += 1
+        end
+        @full_names << @minority_names
+        @full_names.flatten!
+      else
+        i=0
+        @minority_names.length.times do
+          @subgroups["#{@number.to_i - i}"] << @minority_names[0]
+          @minority_names = @minority_names.drop(1)
+          i += 1
+        end
+      end
+    end    
+
+    def randomize_students
+      @students = @group.students.shuffle
+    end
+
+    def establish_subgroups
       @subgroups = {}
       base_group_size = @full_names.length / @number.to_i
       i=1
@@ -22,6 +63,18 @@ class Randomizer
         i += 1  
         @full_names = @full_names.drop(base_group_size)
       end
+    end
+
+    def distribute_one_more_iteration
+      i=1
+      @number.to_i.times do
+        @subgroups["#{i}"] << @full_names[0]
+        @full_names = @full_names.drop(1)
+        i += 1
+      end
+    end
+
+    def distribute_leftovers
       leftovers = @full_names.length
       i=1
       leftovers.times do
@@ -29,10 +82,6 @@ class Randomizer
         @full_names = @full_names.drop(1)
         i += 1
       end
-    end
-
-    def gender_mixer
-      # don't know how I'm going to handle this yet. Maybe sets boys and girls variables from randomized students. Probably has to run a pretty different randomization process to work... Fine.
     end
 
     def separation_detector
@@ -44,13 +93,29 @@ class Randomizer
     end
 
     def display
-      get_randomized_students
-      if @gender_specific == "whatever it is supposed to equal"
-        #run gender randomizer
+      get_group
+      if @group.genderfied == "1"
+        set_genders
+        find_balance
+        set_full_names
+        establish_subgroups
+        spread_minority
+        if @full_names.length < @number.to_i
+          distribute_leftovers
+        else
+          distribute_one_more_iteration
+          distribute_leftovers
+        end
+      else
+        randomize_students
+        set_full_names
+        establish_subgroups
+        distribute_leftovers
       end
-      set_full_names
-      set_random_groups
-      @subgroups
+      # add seperation logic here
+      @subgroups.each do |group_number, students_array|
+        @subgroups[group_number] = students_array.shuffle
+      end
     end
   end
 
