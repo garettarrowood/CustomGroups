@@ -6,11 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :groups
 
-
-
-
-
-
   # these email methods are here to over-ride built in email functionality in Devise. Without them, Devise would cause authentication errors.
   def email_required?
     false
