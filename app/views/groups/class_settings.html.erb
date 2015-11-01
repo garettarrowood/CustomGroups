@@ -5,6 +5,7 @@
 <p>With this button checked, every randomization will create mixed gender groups. If your roster does not contain enough girls or boys for every group to be mixed, the program will spread out the minority gender as much as possible. This feature defaults to mixed, as studies show that mixed gender groups are better.</p>
 
 <%= form_for :group, url: "/groups/#{@group.id}/gender_setter", method: :put do |f| %>
+  <%= f.label :genderfied, "Gender Mixed:" %>
   <%= f.check_box "genderfied" %>
   <%= f.hidden_field "title" %>
   <%= f.submit 'Save selection' %>
