@@ -11,7 +11,7 @@
   <%= f.submit 'Save selection' %>
 <% end %>
 
-<P>You can also set pairs of students that should never be grouped together. Whether these students don't play well together, or they cause too much disruption to your class when around one another, this option will keep the randomizer from ever putting them in the same group.</p>
+<P>You may also set pairs of students that should never be grouped together. Whether these students don't get along, or they goof off so much that your classroom environment suffers, this option will keep the randomizer from ever putting them in the same group.</p>
 
 <%= form_for :separation, url: "/groups/#{@group.id}/add_separation", method: :post do |f| %>
   <%= f.label "Student 1:" %>
