@@ -1,12 +1,13 @@
 <h2><%= @group.title %></h2>
 
+<%= link_to "Create random groups", :small_groups %> | 
+<%= link_to "Edit roster", "/groups/#{@group.id}/students/roster_edit" %> | 
+<%= link_to "Class settings", "/groups/#{@group.id}/class_settings" %> | 
+<a href="/groups">Back</a>
+
 <h3>Class Roster</h3>
 <ul>
   <% @students.each do |student| %>
     <li><%= student.last_name %>, <%= student.first_name %></li>
   <% end %>
 </ul>
-
-<%= link_to "Edit Roster", "/groups/#{@group.id}/students/roster_edit" %> | 
-<%= link_to "Create Random groups", :small_groups %> | 
-<a href="/groups">Back</a>
