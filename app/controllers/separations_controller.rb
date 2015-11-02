@@ -3,11 +3,18 @@ class SeparationsController < ApplicationController
   before_action :set_group
 
   def create
-    if params[:separation][:person1_id] == params[:separation][:person2_id]
+    if @group.separations.length >= 4
+      flash[:alert] = "Cannot create anymore special cases."
+      return redirect_to "/groups/#{@group.id}/class_settings"
+    elsif params[:separation][:person1_id] == params[:separation][:person2_id]
       flash[:alert] = "Cannot separate a student from her/himself."
       return redirect_to "/groups/#{@group.id}/class_settings"
     end
     @separation = @group.separations.build(separation_params)
+    if @separation.check_redundancies
+      flash[:alert] = "This preference already exists"
+      return redirect_to "/groups/#{@group.id}/class_settings"
+    end
     if @separation.save
       flash[:notice] = "Student preference saved"
       redirect_to "/groups/#{@group.id}/class_settings"

@@ -91,11 +91,30 @@ class Randomizer
     end
 
     def separation_detector
-      # returns boolean of whether any special students need to be separated. In master opperation, when it returns false, then the class can output groups.
+      @group.separations != []
     end
 
-    def separator
-      # handles swap of students that need separating.  This runs until separation_detector returns correct boolean value
+    def separator_checker
+      @separts = @group.separations
+      i=0
+      @separts.length.times do 
+        @subgroups.each do |group_number, student_array|
+          if @subgroups[group_number].include?(@separts[i].id1_to_name) && @subgroups[group_number].include?(@separts[i].id2_to_name)
+            return @switch_this = [group_number, @separts[i].id1_to_name]
+          end
+        end
+        i += 1
+      end
+      "pass"
+    end
+
+    def student_switcher
+      @switch_this[0] == @subgroups.length.to_s ? i="1" : i=@subgroups.length.to_s
+      @subgroups[@switch_this[0]].delete(@switch_this[1])
+      another_student = @subgroups[i].sample
+      @subgroups[@switch_this[0]] << another_student
+      @subgroups[i].delete(another_student)
+      @subgroups[i] << @switch_this[1]
     end
 
     def display
@@ -119,7 +138,11 @@ class Randomizer
         establish_subgroups
         distribute_leftovers
       end
-      # add seperation logic here
+      if separation_detector
+        until separator_checker == "pass"
+          student_switcher # run something until the checker clears
+        end
+      end
       @subgroups.each do |group_number, students_array|
         @subgroups[group_number] = students_array.shuffle
       end
