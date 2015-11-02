@@ -1,14 +1,19 @@
 <h1><%= @group.title %></h1>
+<div class="row">
+  <div class="col-sm-7">
+    <h2>Add student:</h2>
 
-<h2>Add student:</h2>
+    <%= render 'form' %>
 
-<%= render 'form' %>
+  </div>
 
-<h3>Current roster:</h3>
+  <div class="col-sm-5">
+    <h3>Current roster:</h3>
 
-<ul>
-  <% @students.each do |student| %>
-    <li><%= student.last_name %>, <%= student.first_name %></li>
-  <% end %>
-</ul>
+    <% @students.each do |student| %>
+      <li><%= student.last_name %>, <%= student.first_name %></li>
+    <% end %>
+  </div>
+</div>
+
 
