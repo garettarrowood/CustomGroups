@@ -37,6 +37,11 @@ class StudentsController < ApplicationController
   end
 
   def destroy
+    @group.separations.each do |separt|
+      if separt.person1_id == @student.id || separt.person2_id == @student.id 
+        separt.destroy
+      end
+    end
     @student.destroy
     flash[:alert] = "#{@student.first_name} #{@student.last_name} has been removed from your roster."
     redirect_to group_students_roster_edit_path(@group)
