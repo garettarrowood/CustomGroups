@@ -3,9 +3,9 @@ h1. CustomGroups
 # Set up an account 
 # Create your classes 
 # Fill your rosters
+# Select whether to create totally random or random but gender-mixed groups
 # Set special cases for students that should not be grouped together
-# Optionally select whether to create standard or gender-specific groups
-# Select how many groups you'd like
-# Recieve randomized groups for your class
+# Enter how many groups you'd like
+# Recieve "configured" yet randomized groups for your class
 
 p. Bonus - Students will not know about the special cases. If Billy and Tommy do not work well together, but of course they want to team up, they will not see that you have disabled this possibility "under the hood".
