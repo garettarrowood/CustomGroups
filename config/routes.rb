@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   authenticate :user do
     get '/groups/class_edit', to: "groups#class_edit", as: 'class_edit'
     resources :groups do
+      resources :separations, only: [:create, :destroy]
       get 'students/roster_edit', to: "students#roster_edit"
       resources :students, except: [:index, :show, :edit]
     end

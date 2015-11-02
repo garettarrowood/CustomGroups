@@ -13,7 +13,7 @@
 
 <P>You may also set pairs of students that should never be grouped together. Whether these students don't get along, or they goof off so much that your classroom environment suffers, this option will keep the randomizer from ever putting them in the same group.</p>
 
-<%= form_for :separation, url: "/groups/#{@group.id}/add_separation", method: :post do |f| %>
+<%= form_for :separation, url: "/groups/#{@group.id}/separations", method: :post do |f| %>
   <%= f.label "Student 1:" %>
   <%= f.select :person1_id, @students.collect { |student| [ "#{student.first_name} #{student.last_name}", student.id ] } %>
   <%= f.label "Student 2:" %>
@@ -21,6 +21,13 @@
   <%= f.submit "Keep these two separate" %>
 <% end %>
 
+<% if @group.separations.length != 0 %>
+  <h5>Current separated students:</h5>
+  <% @group.separations.each do |separt| %>
+    <%= separt.id1_to_name %> will not be grouped with <%= separt.id2_to_name %> - <%= link_to "Remove Separation", group_separation_path(@group, separt), method: :delete, data: { confirm: "Are you sure you want to erase this clause?" } %><br>
+  <% end %>
+<% end %>
+
 <div class="navbar-text">
-  <%= link_to "Back", "/groups/#{@group.id}/students/roster_edit" %>
+  <%= link_to "Back to Roster", "/groups/#{@group.id}/students/roster_edit" %>
 </div>

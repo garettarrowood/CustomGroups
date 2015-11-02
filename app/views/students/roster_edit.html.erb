@@ -20,6 +20,6 @@
 <div class="navbar-text text-center">
   <%= link_to "Add more students", new_group_student_path(@group) %> | 
   <%= link_to "Class settings", "/groups/#{@group.id}/class_settings" %> | 
-  <%= link_to "Back", group_path(@group) %>
+  <%= link_to "Back to #{@group.title} page", group_path(@group) %>
 </div>
 

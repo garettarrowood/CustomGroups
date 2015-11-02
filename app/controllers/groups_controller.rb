@@ -59,10 +59,6 @@ class GroupsController < ApplicationController
   def class_settings
   end
 
-  def add_separation
-    # save to Separation class
-  end
-
   private 
 
     def set_group
