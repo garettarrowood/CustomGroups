@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   
   devise_for :users
-  root 'application#main'
+
+  authenticated :user do
+    root to: "groups#index"
+  end
+
+  unauthenticated do
+    root to: 'application#main', as: :unauth_root
+  end
 
   authenticate :user do
     get '/groups/class_edit', to: "groups#class_edit", as: 'class_edit'
