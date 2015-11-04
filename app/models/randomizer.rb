@@ -126,7 +126,7 @@ class Randomizer
         set_full_names
         establish_subgroups
         spread_minority
-        until @full_names.length < @number.to_i
+        until @full_names.length < @number.to_i do
           distribute_one_more_iteration
         end
         distribute_leftovers
