@@ -126,12 +126,10 @@ class Randomizer
         set_full_names
         establish_subgroups
         spread_minority
-        if @full_names.length < @number.to_i
-          distribute_leftovers
-        else
+        until @full_names.length < @number.to_i
           distribute_one_more_iteration
-          distribute_leftovers
         end
+        distribute_leftovers
       else
         randomize_students
         set_full_names
