@@ -6,18 +6,28 @@
 <%= link_to "Back to #{@group.title}", group_path(@group) %>
 
 <div class="row">
-  <div class="col-sm-12">
-    <% @students.each do |student| %>
-      <%= form_for [@group, student] do |f| %>
-        <%= f.label "First" %>
-        <%= f.text_field :first_name %>
-        <%= f.label "Last" %>
-        <%= f.text_field :last_name %>
-        <%= f.select :gender, [['Male', 'male'], ['Female', 'female']] %>
-        <%= f.submit "Save Change" %>
+  <table style="width:100%">
+    <thead>
+      <tr>
+        <th>First</th>
+        <th>Last</th>
+        <th>Gender</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @students.each do |student| %>
+        <tr>
+          <%= form_for [@group, student] do |f| %>
+            <td><%= f.text_field :first_name %></td>
+            <td><%= f.text_field :last_name %></td>
+            <td><%= f.select :gender, [['Male', 'male'], ['Female', 'female']] %></td>
+            <td><%= f.submit "Save Change" %></td>
+          <% end %>
+          <td><%= button_to "Remove student", group_student_path(@group, student), method: :delete %></td>
+        </tr>
       <% end %>
-      <%= button_to "Remove student", group_student_path(@group, student), method: :delete %>
-    <% end %>
-  </div>
+    </tbody>
+  </table>
 </div>
 
