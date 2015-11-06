@@ -3,7 +3,7 @@ class Randomizer
     attr_accessor :number, :group_id
 
     def number_check
-      @number == "" ? @number = "3" : nil
+      "" == @number ? @number = "3" : nil
     end
 
     def get_group
@@ -12,10 +12,10 @@ class Randomizer
 
     def set_genders
       @girls = @group.students.select do |student|
-        student.gender == "female"  
+        "female" == student.gender
       end
       @boys = @group.students.select do |student|
-        student.gender == "male"  
+        "male" == student.gender  
       end
     end
 
@@ -127,7 +127,7 @@ class Randomizer
     def display
       number_check
       get_group
-      if @group.genderfied == "1"
+      if "1" == @group.genderfied 
         set_genders
         find_balance
         set_full_names
@@ -144,8 +144,8 @@ class Randomizer
         distribute_leftovers
       end
       if separation_detector
-        until separator_checker == "pass"
-          student_switcher # run something until the checker clears
+        until "pass" == separator_checker
+          student_switcher 
         end
       end
       @subgroups.each do |group_number, students_array|
