@@ -7,7 +7,7 @@
 
 <h3>Class Roster</h3>
 <ul>
-  <% @students.each do |student| %>
+  <% @group.alpha_students.each do |student| %>
     <li><%= student.last_name %>, <%= student.first_name %></li>
   <% end %>
 </ul>

@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @students.each do |student| %>
+      <% @group.alpha_students.each do |student| %>
         <tr>
           <%= form_for [@group, student] do |f| %>
             <td><%= f.text_field :first_name %></td>

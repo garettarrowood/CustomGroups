@@ -1,6 +1,5 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :update, :destroy, :small_groups, :grouping, :class_settings, :gender_setter]
-  before_action :set_all_students_in_group_by_last_name, only: [:show, :edit, :update, :destroy, :small_groups, :class_settings]
 
   def index
   end
@@ -68,10 +67,6 @@ class GroupsController < ApplicationController
 
     def group_params
       params.require(:group).permit(:title, :genderfied)
-    end
-
-    def set_all_students_in_group_by_last_name
-      @students = @group.students.sort { |a,b| a.last_name.downcase <=> b.last_name.downcase }
     end
 
 end

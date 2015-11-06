@@ -17,4 +17,8 @@ class Group < ActiveRecord::Base
     false
   end
 
+  def alpha_students
+    students.sort { |a,b| a.last_name.downcase <=> b.last_name.downcase }
+  end
+
 end

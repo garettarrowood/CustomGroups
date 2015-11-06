@@ -12,7 +12,7 @@
   <div class="col-sm-5">
     <h3>Current roster:</h3>
 
-    <% @students.each do |student| %>
+    <% @group.alpha_students.each do |student| %>
       <li><%= student.last_name %>, <%= student.first_name %></li>
     <% end %>
   </div>
