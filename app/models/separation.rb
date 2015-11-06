@@ -24,4 +24,5 @@ class Separation < ActiveRecord::Base
     end
     false
   end
+
 end

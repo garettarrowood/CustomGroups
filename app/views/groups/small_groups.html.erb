@@ -3,7 +3,7 @@
 <div class="col-xs-12 text-center">
   <%= form_tag("/groups/#{@group.id}/grouping") do %>
     <%= label_tag 'Number of groups' %> 
-    <%= number_field_tag 'number', nil, min: 2, max: @max %>
+    <%= number_field_tag 'number', nil, min: @min, max: @max %>
     <%= submit_tag 'Create random groups' %>
   <% end %>
 </div>

@@ -3,9 +3,7 @@ class Randomizer
     attr_accessor :number, :group_id
 
     def number_check
-      if @number == ""
-        @number = "2"
-      end
+      @number == "" ? @number = "3" : nil
     end
 
     def get_group
@@ -95,26 +93,35 @@ class Randomizer
     end
 
     def separator_checker
-      @separts = @group.separations
-      i=0
-      @separts.length.times do 
+      @group.separations.each do |separt|
         @subgroups.each do |group_number, student_array|
-          if @subgroups[group_number].include?(@separts[i].id1_to_name) && @subgroups[group_number].include?(@separts[i].id2_to_name)
-            return @switch_this = [group_number, @separts[i].id1_to_name]
+          if @subgroups[group_number].include?(separt.id1_to_name) && @subgroups[group_number].include?(separt.id2_to_name)
+            return @switch_this = [group_number, [separt.id1_to_name, separt.id2_to_name]]
           end
         end
-        i += 1
       end
       "pass"
     end
 
-    def student_switcher
-      @switch_this[0] == @subgroups.length.to_s ? i="1" : i=@subgroups.length.to_s
-      @subgroups[@switch_this[0]].delete(@switch_this[1])
+    def student_switcher 
+      if @group.separations.length == 3
+        case @switch_this[0]
+        when "1" 
+          i=["2", "3"].sample
+        when "2"
+          i=["1", "3"].sample
+        else
+          i=["1", "2"].sample
+        end
+      else 
+        @switch_this[0] == "1" ? i="2" : i="1"
+      end
+      rand_student = @switch_this[1].sample
+      @subgroups[@switch_this[0]].delete(rand_student)
       another_student = @subgroups[i].sample
       @subgroups[@switch_this[0]] << another_student
       @subgroups[i].delete(another_student)
-      @subgroups[i] << @switch_this[1]
+      @subgroups[i] << rand_student
     end
 
     def display

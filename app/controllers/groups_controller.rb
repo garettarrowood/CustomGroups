@@ -47,6 +47,7 @@ class GroupsController < ApplicationController
   end
 
   def small_groups
+    @group.check_loop_scenario ? @min = 3 : @min = 2
     @max = ((@group.students.length + 1) / 2) > 2 ? ((@group.students.length + 1) / 2) : 2
   end
 
