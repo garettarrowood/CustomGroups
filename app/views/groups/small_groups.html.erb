@@ -8,7 +8,7 @@
   <% end %>
 </div>
 
-<% if Randomizer.group_id == @group.id %>
+<% if @group == Randomizer.group %>
   <%= render 'subgroups' %>
 <% end %>
 

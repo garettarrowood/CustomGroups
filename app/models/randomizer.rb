@@ -1,31 +1,24 @@
 class Randomizer
   class << self
-    attr_accessor :number, :group_id
+    attr_accessor :number, :group
 
     def number_check
       "" == @number ? @number = "3" : nil
     end
 
-    def get_group
-      @group = Group.find(@group_id)
-    end
-
-    def set_genders
-      @girls = @group.students.select do |student|
+    def find_balance
+      girls = @group.students.select do |student|
         "female" == student.gender
       end
-      @boys = @group.students.select do |student|
+      boys = @group.students.select do |student|
         "male" == student.gender  
       end
-    end
-
-    def find_balance
-      @minority = @boys.length < @girls.length ? @boys : @girls
-      @majority = @boys.length >= @girls.length ? @boys : @girls
+      @minority = boys.length < girls.length ? boys : girls
+      @majority = boys.length >= girls.length ? boys : girls
       @students = @majority.shuffle
     end
 
-    def set_full_names
+    def full_names
       @full_names = @students.collect do |student|
         "#{student.first_name} #{student.last_name}"
       end
@@ -126,11 +119,9 @@ class Randomizer
 
     def display
       number_check
-      get_group
       if "1" == @group.genderfied 
-        set_genders
         find_balance
-        set_full_names
+        full_names
         establish_subgroups
         spread_minority
         until @full_names.length < @number.to_i do
@@ -139,7 +130,7 @@ class Randomizer
         distribute_leftovers
       else
         randomize_students
-        set_full_names
+        full_names
         establish_subgroups
         distribute_leftovers
       end
