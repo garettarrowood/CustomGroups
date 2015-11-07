@@ -48,6 +48,9 @@ class GroupsController < ApplicationController
   def small_groups
     @group.check_loop_scenario ? @min = 3 : @min = 2
     @max = ((@group.students.length + 1) / 2) > 2 ? ((@group.students.length + 1) / 2) : 2
+    if Randomizer.group
+      @final_groups = Randomizer.sort
+    end
   end
 
   def grouping

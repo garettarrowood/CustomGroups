@@ -117,7 +117,7 @@ class Randomizer
       @subgroups[i] << rand_student
     end
 
-    def display
+    def sort
       number_check
       if "1" == @group.genderfied 
         find_balance
@@ -143,5 +143,7 @@ class Randomizer
         @subgroups[group_number] = students_array.shuffle
       end
     end
+
+
   end
 end
