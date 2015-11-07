@@ -15,9 +15,9 @@
 
 <%= form_for :separation, url: "/groups/#{@group.id}/separations", method: :post do |f| %>
   <%= f.label "Student 1:" %>
-  <%= f.select :person1_id, @students.collect { |student| [ "#{student.first_name} #{student.last_name}", student.id ] } %>
+  <%= f.select :person1_id, @group.alpha_students.collect { |student| [ "#{student.first_name} #{student.last_name}", student.id ] } %>
   <%= f.label "Student 2:" %>
-  <%= f.select :person2_id, @students.collect { |student| [ "#{student.first_name} #{student.last_name}", student.id ] } %>
+  <%= f.select :person2_id, @group.alpha_students.collect { |student| [ "#{student.first_name} #{student.last_name}", student.id ] } %>
   <%= f.submit "Keep these two separate" %>
 <% end %>
 
