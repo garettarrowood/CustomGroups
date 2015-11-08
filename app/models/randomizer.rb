@@ -155,11 +155,7 @@ class Randomizer
 
     def sort
       number_check
-      if "1" == @group.genderfied 
-        groups = gender_mixed
-      else
-        groups = totally_random
-      end
+      groups =  "1" == @group.genderfied ? gender_mixed : totally_random
       group_shuffler(separator(groups))
     end
   end
