@@ -93,10 +93,10 @@ class Randomizer
       @group.separations != []
     end
 
-    def separator_finder
+    def separator_finder(student_groups)
       @group.separations.each do |separt|
-        @subgroups.each do |group_number, student_array|
-          if @subgroups[group_number].include?(separt.id1_to_name) && @subgroups[group_number].include?(separt.id2_to_name)
+        student_groups.each do |group_number, student_array|
+          if student_groups[group_number].include?(separt.id1_to_name) && student_groups[group_number].include?(separt.id2_to_name)
             return @switch_this = [group_number, [separt.id1_to_name, separt.id2_to_name]]
           end
         end
@@ -104,7 +104,7 @@ class Randomizer
       "pass"
     end
 
-    def student_switcher 
+    def student_switcher(student_groups)
       if @group.separations.length == 3
         case @switch_this[0]
         when "1" 
@@ -118,17 +118,26 @@ class Randomizer
         @switch_this[0] == "1" ? i="2" : i="1"
       end
       rand_student = @switch_this[1].sample
-      @subgroups[@switch_this[0]].delete(rand_student)
-      another_student = @subgroups[i].sample
-      @subgroups[@switch_this[0]] << another_student
-      @subgroups[i].delete(another_student)
-      @subgroups[i] << rand_student
+      student_groups[@switch_this[0]].delete(rand_student)
+      another_student = student_groups[i].sample
+      student_groups[@switch_this[0]] << another_student
+      student_groups[i].delete(another_student)
+      student_groups[i] << rand_student
     end
 
     def group_shuffler(student_groups)
       student_groups.each do |group_number, students_array|
         student_groups[group_number] = students_array.shuffle
       end
+    end
+
+    def separator(student_groups)
+      if separation_detector
+        until "pass" == separator_finder(student_groups)
+          student_switcher(student_groups)
+        end
+      end
+      student_groups
     end
 
     def sort
@@ -143,12 +152,7 @@ class Randomizer
         leftovers = establish_subgroups(randomized_students)
         distribute_leftovers(leftovers)
       end
-      if separation_detector
-        until "pass" == separator_finder
-          student_switcher 
-        end
-      end
-      group_shuffler(@subgroups)
+      group_shuffler(separator(@subgroups))
     end
   end
 end
