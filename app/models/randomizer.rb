@@ -87,6 +87,7 @@ class Randomizer
         student_names = student_names.drop(1)
         i += 1
       end
+      @subgroups
     end
 
     def separation_detector
@@ -140,19 +141,26 @@ class Randomizer
       student_groups
     end
 
+    def gender_mixed
+      @leftovers = establish_subgroups(majority) + spread_minority(minority)
+      until @leftovers.length < @number.to_i do
+        one_more_iteration(@leftovers)
+      end
+      distribute_leftovers(@leftovers)
+    end
+
+    def totally_random
+      distribute_leftovers(establish_subgroups(randomized_students))
+    end
+
     def sort
       number_check
       if "1" == @group.genderfied 
-        @leftovers = establish_subgroups(majority) + spread_minority(minority)
-        until @leftovers.length < @number.to_i do
-          one_more_iteration(@leftovers)
-        end
-        distribute_leftovers(@leftovers)
+        groups = gender_mixed
       else
-        leftovers = establish_subgroups(randomized_students)
-        distribute_leftovers(leftovers)
+        groups = totally_random
       end
-      group_shuffler(separator(@subgroups))
+      group_shuffler(separator(groups))
     end
   end
 end
