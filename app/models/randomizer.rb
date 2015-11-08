@@ -125,6 +125,12 @@ class Randomizer
       @subgroups[i] << rand_student
     end
 
+    def group_shuffler(student_groups)
+      student_groups.each do |group_number, students_array|
+        student_groups[group_number] = students_array.shuffle
+      end
+    end
+
     def sort
       number_check
       if "1" == @group.genderfied 
@@ -142,9 +148,7 @@ class Randomizer
           student_switcher 
         end
       end
-      @subgroups.each do |group_number, students_array|
-        @subgroups[group_number] = students_array.shuffle
-      end
+      group_shuffler(@subgroups)
     end
   end
 end
