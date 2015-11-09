@@ -6,27 +6,17 @@
 <%= link_to "Back to #{@group.title}", group_path(@group) %>
 
 <div class="row">
-  <table style="width:100%">
-    <thead>
-      <tr>
-        <th>First</th>
-        <th>Last</th>
-        <th>Gender</th>
-        <th colspan="2"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @group.alpha_students.each do |student| %>
-        <tr>
-          <%= form_for [@group, student] do |f| %>
-            <td><%= f.text_field :first_name %></td>
-            <td><%= f.text_field :last_name %></td>
-            <td><%= f.select :gender, [['Male', 'male'], ['Female', 'female']] %></td>
-            <td><%= f.submit "Save Change" %></td>
-          <% end %>
-          <td><%= button_to "Remove student", group_student_path(@group, student), method: :delete %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <div class="table">
+    <% @group.alpha_students.each do |student| %>
+      <div class="tr">  
+        <%= form_for [@group, student] do |f| %>
+          <span class="td"><%= f.label "First:" %><%= f.text_field :first_name %></span>
+          <span class="td"><%= f.label "Last:" %><%= f.text_field :last_name %></span>
+          <span class="td"><%= f.label "Gender:" %><%= f.select :gender, [['Male', 'male'], ['Female', 'female']] %></span>
+          <span class="td"><%= f.submit "Save Change" %></span>
+        <% end %>
+        <span class="td"><%= button_to "Remove student", group_student_path(@group, student), method: :delete %></span>
+      </div>
+    <% end %>
+  </div>
 </div>
