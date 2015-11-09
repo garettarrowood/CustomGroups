@@ -15,8 +15,22 @@
  *= require_self 
  */
 
-
-table {
+div.table {
+  display: table;
   border-spacing: 5px;
-  border-collapse: initial;
+}
+
+div.tr {
+  display: table-row;
+}
+
+span.th {
+  display: table-cell;
+  font-weight: bold;
+  text-align: center;
+  width: 2px;
+}
+
+span.td {
+  display: table-cell;
 }
