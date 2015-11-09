@@ -24,13 +24,6 @@ div.tr {
   display: table-row;
 }
 
-span.th {
-  display: table-cell;
-  font-weight: bold;
-  text-align: center;
-  width: 2px;
-}
-
 span.td {
   display: table-cell;
 }
