@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
   has_many :separations, dependent: :delete_all
   belongs_to :user
 
-  validates :title, presence: true
+  validates :title, :user, presence: true
 
   def check_loop_scenario
     if separations.length == 3
