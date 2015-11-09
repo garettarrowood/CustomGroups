@@ -4,34 +4,46 @@ describe User, type: :model do
   describe "creation"  do 
 
     it "needs a username" do
-      user = User.new(password: "example_password")
+      user = User.create(password: "example_password")
 
-      user.save
       expect(user).to_not be_valid
     end
 
     it "needs a password" do
-      user = User.new(username: Faker::Name.name)
+      user = User.create(username: Faker::Name.name)
 
-      user.save
       expect(user).to_not be_valid
     end
 
     it "needs a password of over 6 characters" do
-      user = User.new(username: Faker::Name.name, password: "short")
+      user = User.create(
+        username: Faker::Name.name, 
+        password: "short")
 
-      user.save
       expect(user).to_not be_valid
 
-      user2 = User.new(username: Faker::Name.name, password: "long_enough")
+      user2 = User.create(
+        username: Faker::Name.name, 
+        password: "long_enough")
 
-      user2.save
       expect(user2).to be_valid
     end
-  end
 
-  describe "authentication" do
+    it "needs password and password_confirmation to match" do
+      user = User.create(
+        username: Faker::Name.name,
+        password: "example_password",
+        password_confirmation: "wrong_password")
 
+      expect(user).to_not be_valid
+
+      user2 = User.create(
+        username: Faker::Name.name,
+        password: "example_password",
+        password_confirmation: "example_password")
+
+      expect(user2).to be_valid
+    end
   end
 
   describe "factory" do
@@ -41,6 +53,7 @@ describe User, type: :model do
       expect(user).to be_valid
     end
   end
+
 end
 
 # let(:user) { create :user }
