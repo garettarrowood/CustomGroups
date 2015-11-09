@@ -32,15 +32,15 @@ describe User, type: :model do
     it "needs password and password_confirmation to match" do
       user = User.create(
         username: Faker::Name.name,
-        password: "example_password",
+        password: "right_password",
         password_confirmation: "wrong_password")
 
       expect(user).to_not be_valid
 
       user2 = User.create(
         username: Faker::Name.name,
-        password: "example_password",
-        password_confirmation: "example_password")
+        password: "right_password",
+        password_confirmation: "right_password")
 
       expect(user2).to be_valid
     end
