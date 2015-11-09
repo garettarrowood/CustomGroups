@@ -4,7 +4,7 @@
 <%= link_to "Edit or Delete class", :class_edit %><br><br>
 
 <% if current_user.groups.first == nil %>
-  <a href='/groups/new'><p>None classes created yet. Click here to get started.</p></a>
+  <a href='/groups/new'><p>No classes created yet. Click here to get started.</p></a>
 <% else %>
   <% current_user.groups.each do |group| %>
     <%= link_to group.title, group %><br>
