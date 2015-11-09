@@ -3,46 +3,50 @@ require 'rails_helper'
 describe User, type: :model do
   describe "creation"  do 
 
-    it "needs a username" do
+    it "is invalid without a username" do
       user = User.create(password: "example_password")
 
       expect(user).to_not be_valid
     end
 
-    it "needs a password" do
+    it "is invalid without a password" do
       user = User.create(username: Faker::Name.name)
 
       expect(user).to_not be_valid
     end
 
-    it "needs a password of over 6 characters" do
+    it "is invalid without a password of over 6 characters" do
       user = User.create(
         username: Faker::Name.name, 
         password: "short")
 
       expect(user).to_not be_valid
+    end
 
-      user2 = User.create(
+    it "is valid when with a username and password of over 6 characters" do
+      user = User.create(
         username: Faker::Name.name, 
         password: "long_enough")
 
-      expect(user2).to be_valid
+      expect(user).to be_valid
     end
 
-    it "needs password and password_confirmation to match" do
+    it "is invalid when the password and password_confirmation do not match" do
       user = User.create(
         username: Faker::Name.name,
         password: "right_password",
         password_confirmation: "wrong_password")
 
       expect(user).to_not be_valid
+    end
 
-      user2 = User.create(
+    it "is valid when the password and password_confirmation do match" do
+      user = User.create(
         username: Faker::Name.name,
         password: "right_password",
         password_confirmation: "right_password")
 
-      expect(user2).to be_valid
+      expect(user).to be_valid
     end
   end
 
