@@ -11,7 +11,7 @@ describe Group, type: :model do
       expect(group).to_not be_valid
     end
 
-    it "is invalid with an user_id" do
+    it "is invalid with an associated user" do
       group = Group.create(title: Faker::Name.title)
 
       expect(group).to_not be_valid
@@ -27,10 +27,6 @@ describe Group, type: :model do
 
   describe "factory" do
     let(:group) { create :group }
-
-    it "has a user_id" do
-      expect(group.user_id).to_not be_nil
-    end
 
     it "is valid" do
       expect(group).to be_valid
