@@ -16,7 +16,7 @@ describe Group, type: :model do
       expect(group).to_not be_valid
     end
 
-    it "is valid with a title" do
+    it "is valid with a title and user" do
       group = Group.create(title: Faker::Name.title, user: user)
 
       expect(group).to be_valid
