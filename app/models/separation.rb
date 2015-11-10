@@ -1,6 +1,8 @@
 class Separation < ActiveRecord::Base
   belongs_to :group
 
+  validates :person1_id, :person2_id, :group, presence: true
+
   def id1_to_name
     student = Student.find(person1_id)
     "#{student.first_name} #{student.last_name}"
