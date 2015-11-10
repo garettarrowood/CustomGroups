@@ -7,8 +7,8 @@ require 'factory_girl_rails'
 # the additional setup, and require it from the spec files that actually need
 # it.
 
-# Why was the line below not included by default? It requires files in support/, and I modified it some... Now commented out, as I changed to feature specs:
-# Dir[File.dirname(__FILE__) + "/support/*.rb"].each {|f| require f }
+# Why was the line below not included by default? It requires files in support/, and I modified it some.
+Dir[File.dirname(__FILE__) + "/support/*.rb"].each {|f| require f }
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
