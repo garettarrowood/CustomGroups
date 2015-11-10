@@ -36,13 +36,11 @@ class Group < ActiveRecord::Base
   end
 
   def minority
-    minority = boys.length < girls.length ? boys : girls
-    minority.shuffle
+    boys.length < girls.length ? boys : girls
   end
 
   def majority
-    majority = boys.length >= girls.length ? boys : girls
-    majority.shuffle
+    boys.length >= girls.length ? boys : girls
   end
 
   def randomized_students

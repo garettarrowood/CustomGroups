@@ -9,7 +9,7 @@ class Randomizer
     end
 
     def spread_minority
-      minority_names = full_names(@group.minority)
+      minority_names = full_names(@group.minority.shuffle)
       if @number.to_i < minority_names.length
         i=1
         @number.to_i.times do
@@ -109,7 +109,7 @@ class Randomizer
     end
 
     def gender_mixed
-      @leftovers = establish_subgroups(@group.majority) + spread_minority
+      @leftovers = establish_subgroups(@group.majority.shuffle) + spread_minority
       until @leftovers.length < @number.to_i do
         one_more_iteration(@leftovers)
       end
