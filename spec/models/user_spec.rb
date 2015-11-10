@@ -50,12 +50,14 @@ describe User, type: :model do
     end
   end
 
+  let(:user) { create :user }
+
   describe "factory" do
-    let(:user) { create :user }
 
     it "is valid" do
       expect(user).to be_valid
     end
+    
   end
 
 end

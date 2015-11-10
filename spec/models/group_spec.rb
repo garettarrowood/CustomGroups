@@ -11,7 +11,7 @@ describe Group, type: :model do
       expect(group).to_not be_valid
     end
 
-    it "is invalid with an associated user" do
+    it "is invalid without an associated user" do
       group = Group.create(title: Faker::Name.title)
 
       expect(group).to_not be_valid
@@ -25,8 +25,9 @@ describe Group, type: :model do
 
   end
 
+  let(:group) { create :group }
+
   describe "factory" do
-    let(:group) { create :group }
 
     it "is valid" do
       expect(group).to be_valid
@@ -34,7 +35,6 @@ describe Group, type: :model do
   end
 
   describe "methods" do
-    let(:group) { create :group }
     #add students ot a class, and check alpha method
 
     #add 3 looped separations and check loop method

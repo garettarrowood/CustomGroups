@@ -54,6 +54,31 @@ describe Student, type: :model do
     end
   end
 
+  let(:student) { create :student }
 
+  describe "factory" do
+ 
+    it "is valid" do
+      expect(student).to be_valid
+    end
+
+  end
+
+  describe "methods" do
+
+    it "can return its full name" do
+      bill_moss = Student.create(
+        first_name: "Bill",
+        last_name: "Moss",
+        gender: "male",
+        group: group)
+
+      expect(bill_moss.full_name).to eq("Bill Moss")
+    end
+  end
 
 end
+
+
+
+
