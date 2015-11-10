@@ -23,12 +23,6 @@ class Group < ActiveRecord::Base
     students.sort { |a,b| a.last_name.downcase <=> b.last_name.downcase }
   end
 
-  def student_full_names
-    students.collect do |student|
-      student.full_name
-    end
-  end
-
   def girls
     students.select do |student|
       "female" == student.gender
