@@ -64,9 +64,9 @@ describe Student, type: :model do
 
   end
 
-  describe "methods" do
+  describe "#full_name" do
 
-    it "can return its full name" do
+    it "returns its full name" do
       bill_moss = Student.create(
         first_name: "Bill",
         last_name: "Moss",
