@@ -2,26 +2,7 @@ require 'rails_helper'
 
 describe Group, type: :model do
   let(:user) { create :user }
-
-  describe "creation" do
-    it "is invalid without a title" do
-      group = Group.create(user: user)
-
-      expect(group).to_not be_valid
-    end
-
-    it "is invalid without an associated user" do
-      group = Group.create(title: Faker::Name.title)
-
-      expect(group).to_not be_valid
-    end
-
-    it "is valid with a title and user" do
-      group = Group.create(title: Faker::Name.title, user: user)
-
-      expect(group).to be_valid
-    end
-  end
+  let(:group) { create :group }
 
   describe "factory" do
     it "is valid" do
@@ -29,7 +10,20 @@ describe Group, type: :model do
     end
   end
 
-  let(:group) { create :group }
+  describe "is invalid" do
+    it "without a title" do
+      group.title = nil
+
+      expect(group).to_not be_valid
+    end
+
+    it "without an associated user" do
+      group.user_id = nil
+
+      expect(group).to_not be_valid
+    end
+  end
+
   let!(:student1) { Student.create(first_name: "Derek", last_name: "Zoolander", gender: "male", group: group) }
   let!(:student2) { Student.create(first_name: "Emily", last_name: "Marmaduke", gender: "female", group: group) }
   let!(:student3) { Student.create(first_name: "Garett", last_name: "Arrowood", gender: "male", group: group) }

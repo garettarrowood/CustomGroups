@@ -3,55 +3,6 @@ require 'rails_helper'
 describe Student, type: :model do
   let(:user) { create :user }
   let(:group) { create :group }
-
-  describe "creation" do
-    it "is invalid without a first name" do
-      student = Student.create(
-        last_name: Faker::Name.last_name,
-        gender: "male",
-        group: group)
-
-      expect(student).to_not be_valid
-    end
-
-    it "is invalid without a last name" do
-      student = Student.create(
-        first_name: Faker::Name.first_name,
-        gender: "male",
-        group: group)
-
-      expect(student).to_not be_valid
-    end
-
-    it "is invalid without a gender" do
-      student = Student.create(
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        group: group)
-
-      expect(student).to_not be_valid
-    end
-
-    it "is invalid without an associated group" do
-      student = Student.create(
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        gender: "male")
-
-      expect(student).to_not be_valid
-    end
-
-    it "is valid with a first name, last name, gender, and an associated group" do
-      student = Student.create(
-        first_name: Faker::Name.first_name,
-        last_name: Faker::Name.last_name,
-        gender: "male",
-        group: group)
-
-      expect(student).to be_valid
-    end
-  end
-
   let(:student) { create :student }
 
   describe "factory" do
@@ -60,15 +11,38 @@ describe Student, type: :model do
     end
   end
 
+  describe "is invalid" do
+    it "without a first name" do
+      student.first_name = nil
+
+      expect(student).to_not be_valid
+    end
+
+    it "without a last name" do
+      student.last_name = nil
+
+      expect(student).to_not be_valid
+    end
+
+    it "without a gender" do
+      student.gender = nil
+
+      expect(student).to_not be_valid
+    end
+
+    it "without an associated group" do
+      student.group_id = nil
+
+      expect(student).to_not be_valid
+    end
+  end
+
   describe "#full_name" do
     it "returns its full name" do
-      bill_moss = Student.create(
-        first_name: "Bill",
-        last_name: "Moss",
-        gender: "male",
-        group: group)
+      student.first_name = "Garett"
+      student.last_name = "Arrowood"
 
-      expect(bill_moss.full_name).to eq("Bill Moss")
+      expect(student.full_name).to eq("Garett Arrowood")
     end
   end
 end
