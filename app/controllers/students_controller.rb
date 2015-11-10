@@ -1,6 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_group
   before_action :set_student, only: [:update, :destroy]
+  before_filter :authenticate_user!
 
   def new
     @student = Student.new
