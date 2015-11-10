@@ -5,7 +5,6 @@ describe Student, type: :model do
   let(:group) { create :group }
 
   describe "creation" do
-
     it "is invalid without a first name" do
       student = Student.create(
         last_name: Faker::Name.last_name,
@@ -33,7 +32,6 @@ describe Student, type: :model do
       expect(student).to_not be_valid
     end
 
-
     it "is invalid without an associated group" do
       student = Student.create(
         first_name: Faker::Name.first_name,
@@ -57,15 +55,12 @@ describe Student, type: :model do
   let(:student) { create :student }
 
   describe "factory" do
- 
     it "is valid" do
       expect(student).to be_valid
     end
-
   end
 
   describe "#full_name" do
-
     it "returns its full name" do
       bill_moss = Student.create(
         first_name: "Bill",
@@ -76,9 +71,6 @@ describe Student, type: :model do
       expect(bill_moss.full_name).to eq("Bill Moss")
     end
   end
-
 end
-
-
 
 

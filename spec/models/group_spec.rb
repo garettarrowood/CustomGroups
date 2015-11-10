@@ -49,7 +49,6 @@ describe Group, type: :model do
   end
 
   describe "separates students by gender" do
-
     describe "#girls" do
       it "returns female students" do
         expect(group.girls).to eq([student2])
@@ -107,6 +106,5 @@ describe Group, type: :model do
       expect(group.check_loop_scenario).to be true
     end
   end
-
-
 end
+
