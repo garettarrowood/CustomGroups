@@ -2,39 +2,14 @@ class Randomizer
   class << self
     attr_accessor :number, :group
 
-    def number_check
-      "" == @number ? @number = "3" : nil
-    end
-
-    def find_gender_balance
-      @girls = @group.students.select do |student|
-        "female" == student.gender
-      end
-      @boys = @group.students.select do |student|
-        "male" == student.gender  
-      end
-    end
-
-    def minority
-      find_gender_balance
-      minority = @boys.length < @girls.length ? @boys : @girls
-      minority.shuffle
-    end
-
-    def majority
-      find_gender_balance
-      majority = @boys.length >= @girls.length ? @boys : @girls
-      majority.shuffle
-    end
-
     def full_names(students)
       students.collect do |student|
-        "#{student.first_name} #{student.last_name}"
+        student.full_name
       end
     end
 
-    def spread_minority(students)
-      minority_names = full_names(students)
+    def spread_minority
+      minority_names = full_names(@group.minority)
       if @number.to_i < minority_names.length
         i=1
         @number.to_i.times do
@@ -51,10 +26,6 @@ class Randomizer
         end
       end
       minority_names
-    end    
-
-    def randomized_students
-      @group.students.shuffle
     end
 
     def establish_subgroups(students)
@@ -88,10 +59,6 @@ class Randomizer
         i += 1
       end
       @subgroups
-    end
-
-    def separation_detector
-      @group.separations != []
     end
 
     def separator_finder(student_groups)
@@ -133,7 +100,7 @@ class Randomizer
     end
 
     def separator(student_groups)
-      if separation_detector
+      if @group.separation_detector
         until "pass" == separator_finder(student_groups)
           student_switcher(student_groups)
         end
@@ -142,7 +109,7 @@ class Randomizer
     end
 
     def gender_mixed
-      @leftovers = establish_subgroups(majority) + spread_minority(minority)
+      @leftovers = establish_subgroups(@group.majority) + spread_minority
       until @leftovers.length < @number.to_i do
         one_more_iteration(@leftovers)
       end
@@ -150,11 +117,10 @@ class Randomizer
     end
 
     def totally_random
-      distribute_leftovers(establish_subgroups(randomized_students))
+      distribute_leftovers(establish_subgroups(@group.randomized_students))
     end
 
     def sort
-      number_check
       groups =  "1" == @group.genderfied ? gender_mixed : totally_random
       group_shuffler(separator(groups))
     end

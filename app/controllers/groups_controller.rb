@@ -55,7 +55,7 @@ class GroupsController < ApplicationController
 
   def grouping
     Randomizer.group = @group
-    Randomizer.number = params[:number]
+    Randomizer.number = "" == params[:number] ? "3" : params[:number]
     redirect_to "/groups/#{@group.id}/small_groups"
   end
 

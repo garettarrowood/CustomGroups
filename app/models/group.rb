@@ -23,4 +23,40 @@ class Group < ActiveRecord::Base
     students.sort { |a,b| a.last_name.downcase <=> b.last_name.downcase }
   end
 
+  def student_full_names
+    students.collect do |student|
+      student.full_name
+    end
+  end
+
+  def girls
+    students.select do |student|
+      "female" == student.gender
+    end
+  end
+
+  def boys
+    students.select do |student|
+      "male" == student.gender
+    end
+  end
+
+  def minority
+    minority = boys.length < girls.length ? boys : girls
+    minority.shuffle
+  end
+
+  def majority
+    majority = boys.length >= girls.length ? boys : girls
+    majority.shuffle
+  end
+
+  def randomized_students
+    students.shuffle
+  end
+
+  def separation_detector
+    separations != []
+  end
+
 end
