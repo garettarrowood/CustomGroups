@@ -61,5 +61,3 @@ describe User, type: :model do
   end
 
 end
-
-# let(:user) { create :user }
