@@ -1,6 +1,6 @@
 class Randomizer
   class << self
-    attr_accessor :number, :group
+    attr_accessor :number, :group, :subgroups, :leftovers
 
     def full_names(students)
       students.collect do |student|
@@ -121,8 +121,8 @@ class Randomizer
     end
 
     def sort
-      groups =  "1" == @group.genderfied ? gender_mixed : totally_random
-      group_shuffler(separator(groups))
+      "1" == @group.genderfied ? gender_mixed : totally_random
+      group_shuffler(separator(@subgroups))
     end
   end
 end
