@@ -59,11 +59,22 @@ describe "Group management" do
     visit '/groups/class_edit'
 
     within("#edit_group_1") do
-      fill_in("Title:", with: "Editted Class Title")
+      fill_in("group_title", with: "Editted Class Title")
     end
 
     first(:button, "Save Change").click
-    expect(page).to have_content "Class 1 updated"
+    expect(page).to have_content "Editted Class Title"
+  end
+
+  it 'will not update group with empty field' do
+    visit '/groups/class_edit'
+
+    within("#edit_group_1") do
+      fill_in("group_title", with: "")
+    end
+
+    first(:button, "Save Change").click
+    expect(page).to have_content "Unable to update"
   end
 
   it 'can delete group' do
