@@ -90,7 +90,7 @@ describe Randomizer, type: :model do
     end
   end
 
-  describe 'group_shuffler' do
+  describe '.group_shuffler' do
 
     before do
       Randomizer.establish_subgroups(group.students)
@@ -128,7 +128,6 @@ describe Randomizer, type: :model do
         end
       end
 
-      
     end
   end
 end
