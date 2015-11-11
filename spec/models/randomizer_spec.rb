@@ -41,14 +41,14 @@ describe Randomizer, type: :model do
       expect(Randomizer.subgroups).to_not have_key("4")
     end
 
-    describe 'if students are divisible by @number' do
+    context 'if students are divisible by @number' do
       it 'returns empty array' do
         established = Randomizer.establish_subgroups(group.students)
         expect(established).to eq([])
       end
     end
 
-    describe 'if students are not divisible by @number' do 
+    context 'if students are not divisible by @number' do 
       let!(:extra_student1) { create :student, group: group }
       let!(:extra_student2) { create :student, group: group }
 
@@ -127,7 +127,6 @@ describe Randomizer, type: :model do
           Randomizer.sort
         end
       end
-
     end
   end
 end
