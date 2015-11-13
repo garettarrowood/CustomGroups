@@ -93,14 +93,14 @@ describe "Group management" do
     expect(page).to have_content "On this page you can set parameters for this group's randomization."
   end
 
-  it 'can change "Gender Mixed" setting' do
-    visit "/groups/1/class_settings"
+  # it 'can change "Gender Mixed" setting' do
+  #   visit "/groups/1/class_settings"
 
-    check('Gender Mixed:')
+  #   check('Gender Mixed:')
 
-    click_button "Save selection"
+  #   click_button "Save selection"
 
-    expect(page).to have_css('input.checked')
-  end
+  #   expect(page).to have_css('input.checked')
+  # end
 
 end
