@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     get '/groups/class_edit', to: "groups#class_edit", as: 'class_edit'
     resources :groups do
       resources :separations, only: [:create, :destroy]
-      get 'students/roster_edit', to: "students#roster_edit"
+      get 'students/roster_edit', to: "students#roster_edit", as: "edit_roster"
       resources :students, except: [:index, :show, :edit]
     end
     get '/groups/:id/small_groups', to: "groups#small_groups", as: "small_groups"

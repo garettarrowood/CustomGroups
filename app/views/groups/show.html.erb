@@ -1,9 +1,9 @@
 <h2><%= @group.title %></h2>
 
 <%= link_to "Create random groups", :small_groups %> | 
-<%= link_to "Edit roster", "/groups/#{@group.id}/students/roster_edit" %> | 
-<%= link_to "Class settings", "/groups/#{@group.id}/class_settings" %> | 
-<a href="/groups">Back</a>
+<%= link_to "Edit roster", group_edit_roster_path(@group) %> | 
+<%= link_to "Class settings", :class_settings %> | 
+<%= link_to "Back", groups_path %>
 
 <h3>Class Roster</h3>
 <ul>

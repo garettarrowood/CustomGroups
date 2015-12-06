@@ -2,7 +2,7 @@
 <h3>Class Roster</h3>
 
 <%= link_to "Add more students", new_group_student_path(@group) %> | 
-<%= link_to "Class settings", "/groups/#{@group.id}/class_settings" %> | 
+<%= link_to "Class settings", class_settings_path(@group) %> | 
 <%= link_to "Back to #{@group.title}", group_path(@group) %>
 
 <div class="row">
