@@ -35,28 +35,10 @@ describe Randomizer, type: :model do
 
     it "@number determines amount of @subgroups" do
       Randomizer.establish_subgroups(group.students)
-      expect(Randomizer.subgroups).to have_key("1")
-      expect(Randomizer.subgroups).to have_key("2")
-      expect(Randomizer.subgroups).to have_key("3")
-      expect(Randomizer.subgroups).to_not have_key("4")
-    end
-
-    context 'if students are divisible by @number' do
-      it 'returns empty array' do
-        established = Randomizer.establish_subgroups(group.students)
-        expect(established).to eq([])
-      end
-    end
-
-    context 'if students are not divisible by @number' do 
-      let!(:extra_student1) { create :student, group: group }
-      let!(:extra_student2) { create :student, group: group }
-
-      it 'returns full_names of extra students' do
-        established = Randomizer.establish_subgroups(group.students)
-        expect(established.length).to eq(2)
-        expect(established[0]).to be_an_instance_of(String)
-      end
+      expect(Randomizer.subgroups).to have_key(1)
+      expect(Randomizer.subgroups).to have_key(2)
+      expect(Randomizer.subgroups).to have_key(3)
+      expect(Randomizer.subgroups).to_not have_key(4)
     end
   end
 
@@ -82,11 +64,11 @@ describe Randomizer, type: :model do
     end
 
     it "with values as arrays" do
-      expect(Randomizer.subgroups["1"]).to be_an_instance_of(Array)
+      expect(Randomizer.subgroups[1]).to be_an_instance_of(Array)
     end
 
     it "that hold full_names of students" do
-      expect(Randomizer.subgroups["1"][0]).to eq("Kelly Ryan")
+      expect(Randomizer.subgroups[1][0]).to eq("Kelly Ryan")
     end
   end
 
@@ -98,9 +80,9 @@ describe Randomizer, type: :model do
 
     it 'shuffles full_names in subgroups' do
       subgroups = Randomizer.subgroups
-      subgroup_1 = subgroups["1"]
-      expect(Randomizer.group_shuffler(subgroups)["1"]).to match_array(subgroup_1)
-      expect(Randomizer.group_shuffler(subgroups)["1"]).not_to eq(subgroup_1)
+      subgroup_1 = subgroups[1]
+      expect(Randomizer.group_shuffler(subgroups)[1]).to match_array(subgroup_1)
+      expect(Randomizer.group_shuffler(subgroups)[1]).not_to eq(subgroup_1)
     end
   end
 
@@ -111,8 +93,8 @@ describe Randomizer, type: :model do
     describe "randomizes students in subgroups based on conditions" do
       it "divides @subgroups roughly equal in size" do
         group_size = group.students.length
-        expect(Randomizer.sort["1"].length).to be_within(1).of(group_size/3)
-        expect(Randomizer.sort["2"].length).to be_within(1).of(group_size/3)
+        expect(Randomizer.sort[1].length).to be_within(1).of(group_size/3)
+        expect(Randomizer.sort[2].length).to be_within(1).of(group_size/3)
       end
 
       describe "calls appropriate gender method" do

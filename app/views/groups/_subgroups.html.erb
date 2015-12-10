@@ -2,7 +2,7 @@
 <% Randomizer.number.to_i.times do %>
   <div class="col-xs-4">
     <h4><u>Group <%= i %></u></h4>
-    <% @final_groups["#{i}"].each do |name| %>
+    <% @final_groups[i].each do |name| %>
       <p><%= name %></p>
     <% end %>
     <% i += 1 %>
