@@ -34,14 +34,6 @@ describe Group, type: :model do
     end
   end
 
-  describe "#randomized_students" do
-    it "shuffles students" do
-      mixed_up = group.randomized_students
-
-      expect(mixed_up).to include(student1, student2, student3)
-    end
-  end
-
   describe "separates students by gender" do
     describe "#girls" do
       it "returns female students" do
