@@ -29,7 +29,7 @@ class StudentsController < ApplicationController
   def update
     if @student.update(student_params)
       flash[:notice] = "#{@student.first_name} #{@student.last_name} updated."
-      redirect_to group_students_roster_edit_path(@group)
+      redirect_to group_edit_roster_path(@group)
     else
       flash[:alert] = "Unable to update"
       render action: 'roster_edit'
@@ -44,7 +44,7 @@ class StudentsController < ApplicationController
     end
     @student.destroy
     flash[:alert] = "#{@student.first_name} #{@student.last_name} has been removed from your roster."
-    redirect_to group_students_roster_edit_path(@group)
+    redirect_to group_edit_roster_path(@group)
   end
 
   private
