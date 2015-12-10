@@ -33,6 +33,7 @@ class Randomizer
     end
 
     def separator_finder(student_groups)
+      switch_this = "none needed"
       @group.separations.each do |separation|
         student_groups.each do |group_number, student_array|
           if student_groups[group_number].include?(separation.id1_to_name) && student_groups[group_number].include?(separation.id2_to_name)
@@ -40,12 +41,12 @@ class Randomizer
           end
         end
       end
-      defined?(switch_this) ? @switch_this = switch_this : "pass"
+      switch_this != "none needed" ? switch_this : "pass"
     end
 
-    def student_switcher(student_groups)
+    def student_switcher(student_groups, conflict_info)
       if @group.separations.length == 3
-        case @switch_this[0]
+        case conflict_info[0]
         when 1 
           i=[2, 3].sample
         when 2
@@ -54,12 +55,12 @@ class Randomizer
           i=[1, 2].sample
         end
       else 
-        @switch_this[0] == 1 ? i=2 : i=1
+        conflict_info[0] == 1 ? i=2 : i=1
       end
-      rand_student = @switch_this[1].sample
-      student_groups[@switch_this[0]].delete(rand_student)
+      rand_student = conflict_info[1].sample
+      student_groups[conflict_info[0]].delete(rand_student)
       another_student = student_groups[i].sample
-      student_groups[@switch_this[0]] << another_student
+      student_groups[conflict_info[0]] << another_student
       student_groups[i].delete(another_student)
       student_groups[i] << rand_student
     end
@@ -72,8 +73,8 @@ class Randomizer
 
     def separator(student_groups)
       if @group.separation_detector
-        until "pass" == separator_finder(student_groups)
-          student_switcher(student_groups)
+        until "pass" == conflict_info = separator_finder(student_groups)
+          student_switcher(student_groups, conflict_info)
         end
       end
       student_groups
