@@ -43,10 +43,6 @@ class Group < ActiveRecord::Base
     boys.length >= girls.length ? boys : girls
   end
 
-  def randomized_students
-    students.shuffle
-  end
-
   def separation_detector
     separations != []
   end
