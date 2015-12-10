@@ -90,14 +90,14 @@ describe Randomizer, type: :model do
   end
 
   describe ".sort" do
-    describe "randomizes students in subgroups based on conditions" do
+    context "randomizes students in subgroups based on conditions" do
       it "divides @subgroups roughly equal in size" do
         group_size = group.students.length
         expect(Randomizer.sort[1].length).to be_within(1).of(group_size/3)
         expect(Randomizer.sort[2].length).to be_within(1).of(group_size/3)
       end
 
-      describe "calls appropriate gender method" do
+      context "calls appropriate gender method" do
         it "is not set to gender mixed" do
           expect(Randomizer).to receive(:totally_random)
           Randomizer.sort
