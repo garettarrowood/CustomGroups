@@ -80,12 +80,12 @@ class Randomizer
     end
 
     def gender_mixed
-      establish_subgroups(@group.majority)
-      spread_minority(@group.minority)
+      establish_subgroups(@group.majority.shuffle)
+      spread_minority(@group.minority.shuffle)
     end
 
     def totally_random
-      establish_subgroups(@group.students)
+      establish_subgroups(@group.students.shuffle)
     end
 
     def sort
