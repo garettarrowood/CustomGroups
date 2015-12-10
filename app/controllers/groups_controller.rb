@@ -43,7 +43,7 @@ class GroupsController < ApplicationController
 
   def gender_setter
     @group.update(group_params)
-    redirect_to "/groups/#{@group.id}/class_settings"
+    redirect_to :class_settings
   end
 
   def small_groups
@@ -55,9 +55,13 @@ class GroupsController < ApplicationController
   end
 
   def grouping
+    if @group.students.length < 5
+      flash[:alert] = "Must have at least 5 students in class to create random groups. Please add students to roster."
+      return redirect_to :small_groups
+    end
     Randomizer.group = @group
     Randomizer.number = "" == params[:number] ? "3" : params[:number]
-    redirect_to "/groups/#{@group.id}/small_groups"
+    redirect_to :small_groups
   end
 
   def class_settings
