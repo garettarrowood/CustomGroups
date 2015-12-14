@@ -7,13 +7,15 @@
 # Ignore bundler config.
 /.bundle
 
-# Ignore the default SQLite database.
+# Ignore databases.
 /db/*.sqlite3
 /db/*.sqlite3-journal
+/db/*.postgres
 
 # Ignore all logfiles and tempfiles.
 /log/*
 !/log/.keep
 /tmp
-coverage
-/config/secrets.yml
+
+/coverage/
+config/secrets.yml
