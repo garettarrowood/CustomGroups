@@ -49,9 +49,6 @@ class GroupsController < ApplicationController
   def small_groups
     @group.check_loop_scenario ? @min = 3 : @min = 2
     @max = ((@group.students.length + 1) / 2) > 2 ? ((@group.students.length + 1) / 2) : 2
-    if Randomizer.group
-      @final_groups = SubgroupFormatter.new(Randomizer.sort).html
-    end
   end
 
   def grouping
@@ -59,9 +56,13 @@ class GroupsController < ApplicationController
       flash[:alert] = "Must have at least 5 students in class to create random groups. Please add students to roster."
       redirect_to :small_groups and return
     end
-    Randomizer.group = @group
-    Randomizer.number = "" == params[:number] ? "3" : params[:number]
-    redirect_to :small_groups
+    number = "" == params[:number] ? "3" : params[:number]
+    subgroup = Subgroup.new(number, @group)
+    sorted = Randomizer.new(subgroup)
+    @final_groups = SubgroupFormatter.new(sorted).html
+    @group.check_loop_scenario ? @min = 3 : @min = 2
+    @max = ((@group.students.length + 1) / 2) > 2 ? ((@group.students.length + 1) / 2) : 2
+    render :small_groups
   end
 
   def class_settings

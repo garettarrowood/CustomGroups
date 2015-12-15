@@ -1,7 +1,7 @@
 class SubgroupFormatter
 
   def initialize(groupdata)
-    @groupdata = groupdata
+    @groupdata = groupdata.sort
   end
 
   def html
