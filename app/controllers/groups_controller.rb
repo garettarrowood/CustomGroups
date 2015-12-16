@@ -57,9 +57,8 @@ class GroupsController < ApplicationController
       redirect_to :small_groups and return
     end
     number = "" == params[:number] ? "3" : params[:number]
-    subgroup = Subgroup.new(number, @group)
-    sorted = Randomizer.new(subgroup)
-    @final_groups = SubgroupFormatter.new(sorted).html
+    sorted_groups = Separator.new(Subgroup.new(number, @group))
+    @final_groups = SubgroupFormatter.new(sorted_groups).html
     @group.check_loop_scenario ? @min = 3 : @min = 2
     @max = ((@group.students.length + 1) / 2) > 2 ? ((@group.students.length + 1) / 2) : 2
     render :small_groups
