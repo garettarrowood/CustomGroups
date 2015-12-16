@@ -25,7 +25,7 @@ class Separator
   end
 
   def student_switcher(student_groups, conflict_info)
-    if @group.separations.length == 3
+    if @group.separations.size == 3
       case conflict_info[0]
       when 1 
         i=[2, 3].sample

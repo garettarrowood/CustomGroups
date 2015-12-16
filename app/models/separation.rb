@@ -15,13 +15,10 @@ class Separation < ActiveRecord::Base
 
   def check_redundancies
     group = Group.find(group_id)
-    if group.separations != []
-      group.separations.each do |separt|
-        if person1_id == separt.person1_id && person2_id == separt.person2_id
-          return true
-        elsif person1_id == separt.person2_id && person2_id == separt.person1_id
-          return true
-        end
+    return false if group.separations == []
+    group.separations.each do |separt|
+      if (person1_id == separt.person1_id && person2_id == separt.person2_id) || (person1_id == separt.person2_id && person2_id == separt.person1_id)
+        return true
       end
     end
     false

@@ -48,11 +48,11 @@ class GroupsController < ApplicationController
 
   def small_groups
     @group.check_loop_scenario ? @min = 3 : @min = 2
-    @max = ((@group.students.length + 1) / 2) > 2 ? ((@group.students.length + 1) / 2) : 2
+    @max = ((@group.students.size + 1) / 2) > 2 ? ((@group.students.size + 1) / 2) : 2
   end
 
   def grouping
-    if @group.students.length < 5
+    if @group.students.size < 5
       flash[:alert] = "Must have at least 5 students in class to create random groups. Please add students to roster."
       redirect_to :small_groups and return
     end
@@ -60,7 +60,7 @@ class GroupsController < ApplicationController
     sorted_groups = Separator.new(Subgroup.new(number, @group))
     @final_groups = SubgroupFormatter.new(sorted_groups).html
     @group.check_loop_scenario ? @min = 3 : @min = 2
-    @max = ((@group.students.length + 1) / 2) > 2 ? ((@group.students.length + 1) / 2) : 2
+    @max = ((@group.students.size + 1) / 2) > 2 ? ((@group.students.size + 1) / 2) : 2
     render :small_groups
   end
 

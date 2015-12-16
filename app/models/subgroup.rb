@@ -30,7 +30,7 @@ class Subgroup
     comparisons = @number.to_i / 2
     i = 1
     comparisons.times do 
-      if @factions[i].length > @factions[@number.to_i + 1 - i ].length + 1
+      if @factions[i].size > @factions[@number.to_i + 1 - i ].size + 1
         student = @factions[i].shift
         @factions[@number.to_i + 1 - i ]<< student
       end

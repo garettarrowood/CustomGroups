@@ -1,114 +1,116 @@
-require 'rails_helper'
+# This class has been entirely refactored out.
 
-describe Randomizer, type: :model do
-  let(:group) { create :group, genderfied: "0" }
-  let!(:student) { create :student,
-    first_name: "Garett", 
-    last_name: "Arrowood", 
-    gender: "male", 
-    group: group }
+# require 'rails_helper'
 
-  i=1
-  20.times do
-    let!("student#{i}") { create :student, group: group }
-    i+=1
-  end
+# describe Randomizer, type: :model do
+#   let(:group) { create :group, genderfied: "0" }
+#   let!(:student) { create :student,
+#     first_name: "Garett", 
+#     last_name: "Arrowood", 
+#     gender: "male", 
+#     group: group }
 
-  before do
-    Randomizer.group = group
-    Randomizer.number = 3
-  end
+#   i=1
+#   20.times do
+#     let!("student#{i}") { create :student, group: group }
+#     i+=1
+#   end
 
-  describe ".full_names" do
-    it "returns full names of every student" do
-      expect(Randomizer.full_names(group.students)).to include("Garett Arrowood")
-      expect(Randomizer.full_names(group.students).length).to eq 21
-    end
-  end
+#   before do
+#     Randomizer.group = group
+#     Randomizer.number = 3
+#   end
 
-  describe '.establish_subgroups' do
-    it "creates @subgroups hash" do
-      expect(Randomizer.subgroups).to be_nil
-      Randomizer.establish_subgroups(group.students)
-      expect(Randomizer.subgroups).to be_an_instance_of(Hash)
-    end
+#   describe ".full_names" do
+#     it "returns full names of every student" do
+#       expect(Randomizer.full_names(group.students)).to include("Garett Arrowood")
+#       expect(Randomizer.full_names(group.students).size).to eq 21
+#     end
+#   end
 
-    it "@number determines amount of @subgroups" do
-      Randomizer.establish_subgroups(group.students)
-      expect(Randomizer.subgroups).to have_key(1)
-      expect(Randomizer.subgroups).to have_key(2)
-      expect(Randomizer.subgroups).to have_key(3)
-      expect(Randomizer.subgroups).to_not have_key(4)
-    end
-  end
+#   describe '.establish_subgroups' do
+#     it "creates @subgroups hash" do
+#       expect(Randomizer.subgroups).to be_nil
+#       Randomizer.establish_subgroups(group.students)
+#       expect(Randomizer.subgroups).to be_an_instance_of(Hash)
+#     end
 
-  describe '@subgroups' do
-    let(:group2) { create :group }
-    let!(:student0) { create :student,
-      first_name: "Kelly", 
-      last_name: "Ryan",  
-      group: group2 }
-    let!(:studentX) { create :student,
-      first_name: "Joe",
-      last_name: "Biden",
-      group: group2 }
+#     it "@number determines amount of @subgroups" do
+#       Randomizer.establish_subgroups(group.students)
+#       expect(Randomizer.subgroups).to have_key(1)
+#       expect(Randomizer.subgroups).to have_key(2)
+#       expect(Randomizer.subgroups).to have_key(3)
+#       expect(Randomizer.subgroups).to_not have_key(4)
+#     end
+#   end
 
-    before do
-      Randomizer.group = group2
-      Randomizer.number = 2
-      Randomizer.establish_subgroups(group2.students)
-    end
+#   describe '@subgroups' do
+#     let(:group2) { create :group }
+#     let!(:student0) { create :student,
+#       first_name: "Kelly", 
+#       last_name: "Ryan",  
+#       group: group2 }
+#     let!(:studentX) { create :student,
+#       first_name: "Joe",
+#       last_name: "Biden",
+#       group: group2 }
 
-    it "is a hash" do
-      expect(Randomizer.subgroups).to be_an_instance_of(Hash)
-    end
+#     before do
+#       Randomizer.group = group2
+#       Randomizer.number = 2
+#       Randomizer.establish_subgroups(group2.students)
+#     end
 
-    it "with values as arrays" do
-      expect(Randomizer.subgroups[1]).to be_an_instance_of(Array)
-    end
+#     it "is a hash" do
+#       expect(Randomizer.subgroups).to be_an_instance_of(Hash)
+#     end
 
-    it "that hold full_names of students" do
-      expect(Randomizer.subgroups[1][0]).to eq("Kelly Ryan")
-    end
-  end
+#     it "with values as arrays" do
+#       expect(Randomizer.subgroups[1]).to be_an_instance_of(Array)
+#     end
 
-  describe '.group_shuffler' do
+#     it "that hold full_names of students" do
+#       expect(Randomizer.subgroups[1][0]).to eq("Kelly Ryan")
+#     end
+#   end
 
-    before do
-      Randomizer.establish_subgroups(group.students)
-    end
+#   describe '.group_shuffler' do
 
-    it 'shuffles full_names in subgroups' do
-      subgroups = Randomizer.subgroups
-      subgroup_1 = subgroups[1]
-      expect(Randomizer.group_shuffler(subgroups)[1]).to match_array(subgroup_1)
-      expect(Randomizer.group_shuffler(subgroups)[1]).not_to eq(subgroup_1)
-    end
-  end
+#     before do
+#       Randomizer.establish_subgroups(group.students)
+#     end
 
-  describe ".separator_finder" do
-  end
+#     it 'shuffles full_names in subgroups' do
+#       subgroups = Randomizer.subgroups
+#       subgroup_1 = subgroups[1]
+#       expect(Randomizer.group_shuffler(subgroups)[1]).to match_array(subgroup_1)
+#       expect(Randomizer.group_shuffler(subgroups)[1]).not_to eq(subgroup_1)
+#     end
+#   end
 
-  describe ".sort" do
-    context "randomizes students in subgroups based on conditions" do
-      it "divides @subgroups roughly equal in size" do
-        group_size = group.students.length
-        expect(Randomizer.sort[1].length).to be_within(1).of(group_size/3)
-        expect(Randomizer.sort[2].length).to be_within(1).of(group_size/3)
-      end
+#   describe ".separator_finder" do
+#   end
 
-      context "calls appropriate gender method" do
-        it "is not set to gender mixed" do
-          expect(Randomizer).to receive(:totally_random)
-          Randomizer.sort
-        end
+#   describe ".sort" do
+#     context "randomizes students in subgroups based on conditions" do
+#       it "divides @subgroups roughly equal in size" do
+#         group_size = group.students.size
+#         expect(Randomizer.sort[1].size).to be_within(1).of(group_size/3)
+#         expect(Randomizer.sort[2].size).to be_within(1).of(group_size/3)
+#       end
 
-        it "is set to gender mixed" do
-          group.genderfied = "1"
-          expect(Randomizer).to receive(:gender_mixed)
-          Randomizer.sort
-        end
-      end
-    end
-  end
-end
+#       context "calls appropriate gender method" do
+#         it "is not set to gender mixed" do
+#           expect(Randomizer).to receive(:totally_random)
+#           Randomizer.sort
+#         end
+
+#         it "is set to gender mixed" do
+#           group.genderfied = "1"
+#           expect(Randomizer).to receive(:gender_mixed)
+#           Randomizer.sort
+#         end
+#       end
+#     end
+#   end
+# end

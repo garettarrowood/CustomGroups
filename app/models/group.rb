@@ -6,17 +6,13 @@ class Group < ActiveRecord::Base
   validates :title, :user, presence: true
 
   def check_loop_scenario
-    if separations.length == 3
-      used_ids = []
-      separations.each do |separt|
-        used_ids << separt.person1_id
-        used_ids << separt.person2_id
-      end
-      if used_ids.uniq.length == 3
-        return true
-      end
+    return false unless separations.size == 3
+    used_ids = []
+    separations.each do |separt|
+      used_ids << separt.person1_id
+      used_ids << separt.person2_id
     end
-    false
+    used_ids.uniq.size == 3
   end
 
   def alpha_students
@@ -24,23 +20,19 @@ class Group < ActiveRecord::Base
   end
 
   def girls
-    students.select do |student|
-      "female" == student.gender
-    end
+    students.select { |student| "female" == student.gender }
   end
 
   def boys
-    students.select do |student|
-      "male" == student.gender
-    end
+    students.select { |student| "male" == student.gender }
   end
 
   def minority
-    boys.length < girls.length ? boys : girls
+    boys.length < girls.size ? boys : girls
   end
 
   def majority
-    boys.length >= girls.length ? boys : girls
+    boys.length >= girls.size ? boys : girls
   end
 
   def separation_detector

@@ -21,7 +21,7 @@
   <%= f.submit "Keep these two separate" %>
 <% end %>
 
-<% if @group.separations.length != 0 %>
+<% if @group.separations.size != 0 %>
   <h5>Current separated students: (3 cases maximum)</h5>
   <% @group.separations.each do |separt| %>
     <%= separt.id1_to_name %> will not be grouped with <%= separt.id2_to_name %> - <%= link_to "Remove Separation", group_separation_path(@group, separt), method: :delete, data: { confirm: "Are you sure you want to erase this clause?" } %><br>

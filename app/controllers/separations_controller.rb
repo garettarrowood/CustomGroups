@@ -4,7 +4,7 @@ class SeparationsController < ApplicationController
   before_filter :authenticate_user!
 
   def create
-    if @group.separations.length >= 3
+    if @group.separations.size == 3
       flash[:alert] = "Cannot create anymore special cases."
       return redirect_to "/groups/#{@group.id}/class_settings"
     elsif params[:separation][:person1_id] == params[:separation][:person2_id]
