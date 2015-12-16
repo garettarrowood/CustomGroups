@@ -6,10 +6,9 @@ class Separator
   end
 
   def separator(student_groups)
-    if @group.separation_detector
-      until "pass" == conflict_info = separation_finder(student_groups)
-        student_switcher(student_groups, conflict_info)
-      end
+    return student_groups unless @group.separation_detector
+    until "pass" == conflict_info = separation_finder(student_groups)
+      student_switcher(student_groups, conflict_info)
     end
     student_groups
   end
@@ -17,10 +16,9 @@ class Separator
   def separation_finder(student_groups)
     switch_this = "none needed"
     @group.separations.each do |separation|
-      student_groups.each do |group_number, student_array|
-        if student_groups[group_number].include?(separation.id1_to_name) && student_groups[group_number].include?(separation.id2_to_name)
-          switch_this = [group_number, [separation.id1_to_name, separation.id2_to_name]]
-        end
+      student_groups.each do |group_num, student_array|
+        next unless (student_groups[group_num].include?(separation.id1_to_name) && student_groups[group_num].include?(separation.id2_to_name))
+        switch_this = [group_num, [separation.id1_to_name, separation.id2_to_name]]
       end
     end
     switch_this != "none needed" ? switch_this : "pass"
