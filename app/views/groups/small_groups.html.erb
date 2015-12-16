@@ -1,4 +1,6 @@
-<h3>Random Groups for <%= @group.title %></h3>
+<h2>Random Groups for <%= @group.title %></h2>
+
+<%= link_to "Back", group_path %> 
 
 <div class="col-xs-12 text-center">
   <%= form_tag("/groups/#{@group.id}/grouping") do %>
@@ -11,7 +13,3 @@
 <% if @final_groups %>
   <%= @final_groups %>
 <% end %>
-
-<div class="navbar-text col-xs-12">
-  <%= link_to "Back", group_path %> 
-</div>
