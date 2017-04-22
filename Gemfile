@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.3.3'
-gem 'rails', '4.2.4'
+gem 'rails', '5.0.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
@@ -17,9 +17,9 @@ end
 
 group :development, :test do
   gem 'pry'
-  gem 'rspec-rails', '~>3.3', '>= 3.3.3'
+  gem 'rspec'
+  gem 'rspec-rails'
   gem 'sqlite3'
-  gem 'rspec', '~> 3.3.0'
   gem 'database_cleaner'
 end
 

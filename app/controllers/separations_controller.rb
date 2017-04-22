@@ -1,7 +1,7 @@
 class SeparationsController < ApplicationController
   before_action :set_separation, only: [:destroy]
   before_action :set_group
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def create
     if @group.separations.size == 3

@@ -1,7 +1,7 @@
 class StudentsController < ApplicationController
   before_action :set_group
   before_action :set_student, only: [:update, :destroy]
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
   def new
     @student = Student.new
@@ -13,7 +13,7 @@ class StudentsController < ApplicationController
       if params[:commit] == 'Add next student'
         flash[:notice] = 'Student created, next...'
         redirect_to new_group_student_path
-      else 
+      else
         flash[:notice] = 'Last student saved.'
         redirect_to @group
       end
@@ -38,7 +38,7 @@ class StudentsController < ApplicationController
 
   def destroy
     @group.separations.each do |separt|
-      if separt.person1_id == @student.id || separt.person2_id == @student.id 
+      if separt.person1_id == @student.id || separt.person2_id == @student.id
         separt.destroy
       end
     end
@@ -51,7 +51,7 @@ class StudentsController < ApplicationController
 
     def student_params
       params.require(:student).permit(:first_name, :last_name, :gender)
-    end    
+    end
 
     def set_group
       @group = Group.find(params[:group_id])
