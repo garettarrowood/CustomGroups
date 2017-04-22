@@ -8,10 +8,6 @@
     <%= f.text_field :username, autofocus: true %>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
   <div class="field">
     <%= f.label :current_password %> <br />
     <%= f.password_field :current_password, autocomplete: "off" %>
