@@ -12,7 +12,7 @@
  *
  *= require_tree ../../../vendor/assets/stylesheets/
  *= require_tree .
- *= require_self 
+ *= require_self
  */
 
 div.table {
@@ -26,4 +26,17 @@ div.tr {
 
 span.td {
   display: table-cell;
+}
+
+.new_user, .edit_user {
+
+  margin-left: 8px;
+
+  .field {
+    margin-bottom: 8px;
+  }
+
+  .actions {
+    margin-top: 15px;
+  }
 }
