@@ -1,13 +1,13 @@
 <h2>Select a Class</h2>
 
-<%= link_to "Add Class", new_group_path %> | 
+<%= link_to "Add Class", new_group_path %> |
 <%= link_to "Edit or Delete class", :class_edit %><br><br>
 
 <% if current_user.groups.first == nil %>
   <p>No classes created yet. <%= link_to "Click here to get started.", new_group_path %></p>
 <% else %>
   <% current_user.groups.each do |group| %>
-    <%= link_to group.title, group %><br>
+    <%= link_to group.title, group, class: "btn btn-info class-button" %><br>
   <% end %>
 <% end %>
 

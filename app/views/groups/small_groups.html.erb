@@ -1,12 +1,12 @@
 <h2>Random Groups for <%= @group.title %></h2>
 
-<%= link_to "Back", group_path %> 
+<%= link_to "Back", group_path %>
 
 <div class="col-xs-12 text-center">
   <%= form_tag("/groups/#{@group.id}/grouping") do %>
-    <%= label_tag 'Number of groups' %> 
-    <%= number_field_tag 'number', nil, min: @min, max: @max %>
-    <%= submit_tag 'Create random groups' %>
+    <%= label_tag 'Number of groups' %>
+    <%= number_field_tag 'number', nil, min: @min, max: @max, class: "group-number" %>
+    <%= submit_tag 'Create Random Groups', class: "btn btn-sm btn-info" %>
   <% end %>
 </div>
 

@@ -28,9 +28,17 @@ span.td {
   display: table-cell;
 }
 
+.class-button {
+  margin: 10px;
+}
+
 .group {
   font-style: italic;
   text-decoration: underline;
+}
+
+.group-number {
+  width: 50px;
 }
 
 .student-name {
