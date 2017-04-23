@@ -1,22 +1,22 @@
 
 <h3>Class Roster</h3>
 
-<%= link_to "Add more students", new_group_student_path(@group) %> | 
-<%= link_to "Class settings", class_settings_path(@group) %> | 
+<%= link_to "Add more students", new_group_student_path(@group) %> |
+<%= link_to "Class settings", class_settings_path(@group) %> |
 <%= link_to "Back to #{@group.title}", group_path(@group) %>
 
 <div class="row">
   <div style="width:60%" class="table">
     <% @group.alpha_students.each do |student| %>
-      <div class="tr">  
+      <div class="tr">
         <%= form_for [@group, student] do |f| %>
           <span class="td"><%= f.label "First" %><%= f.text_field :first_name %></span>
           <span class="td"><%= f.label "Last" %><%= f.text_field :last_name %></span>
           <span class="td"><%= f.label "M" %><%= f.radio_button :gender, 'male' %></span>
           <span class="td"><%= f.label "F" %><%= f.radio_button :gender, 'female' %></span>
-          <span class="td"><%= f.submit "Save Change" %></span>
+          <span class="td"><%= f.submit "Save Change", class: "btn btn-success btn-sm roster-margin" %></span>
         <% end %>
-        <span class="td"><%= button_to "Remove #{student.first_name}", group_student_path(@group, student), method: :delete %></span>
+        <span class="td"><%= button_to "Remove #{student.first_name}", group_student_path(@group, student), class: "btn btn-primary btn-sm roster-margin", method: :delete %></span>
       </div>
     <% end %>
   </div>

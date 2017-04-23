@@ -28,7 +28,6 @@
     Male: <%= f.radio_button :gender, "male" %>
   </p>
 
-  <%= f.submit "Add student" %>
-
+  <%= f.submit "Add student", class: "btn btn-success" %>
+  <%= link_to "#{@group.title}'s Roster", group_path(@group), class: "btn btn-default" %>
 <% end %>
-
