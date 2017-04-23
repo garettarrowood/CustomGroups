@@ -10,13 +10,8 @@ class StudentsController < ApplicationController
   def create
     @student = @group.students.build(student_params)
     if @student.save
-      if params[:commit] == 'Add next student'
-        flash[:notice] = 'Student created, next...'
-        redirect_to new_group_student_path
-      else
-        flash[:notice] = 'Last student saved.'
-        redirect_to @group
-      end
+      flash[:notice] = 'Student created, next...'
+      redirect_to new_group_student_path
     else
       flash[:alert] = 'Student was not created'
       render 'new'
