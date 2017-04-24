@@ -13,13 +13,13 @@ describe "Student management" do
 
     fill_in "Class title", with: "Example Class"
 
-    click_button "Start adding students"
+    click_button "Create Class"
 
     fill_in "First name", with: "Garett"
     fill_in "Last name", with: "Arrowood"
     choose('student_gender_male')
 
-    click_button "Add next student"
+    click_button "Add student"
 
     expect(page).to have_content "Student created, next..."
   end
@@ -33,7 +33,7 @@ describe "Student management" do
     fill_in "Last name", with: "Arrowood"
     choose('student_gender_male')
 
-    click_button "Add next student"
+    click_button "Add student"
 
     expect(page).to have_content "Student created, next..."
   end
@@ -45,7 +45,7 @@ describe "Student management" do
 
     fill_in "First name", with: "Bob"
 
-    click_button "Add next student"
+    click_button "Add student"
 
     expect(page).to have_content "Student was not created"
   end

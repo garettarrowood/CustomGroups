@@ -39,7 +39,7 @@ describe "Group management" do
 
     fill_in "Class title", with: "Example Class"
 
-    click_button "Start adding students"
+    click_button "Create Class"
 
     expect(page).to have_content "Example Class"
     expect(page).to have_content "Add student:"
@@ -49,7 +49,7 @@ describe "Group management" do
   it 'will not create new group without title' do
     visit '/groups/new'
 
-    click_button "Start adding students"
+    click_button "Create Class"
 
     expect(page).to have_content "Title can't be blank"
     expect(page).to have_content "Class needs to have a title"
