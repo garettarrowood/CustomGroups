@@ -5,6 +5,7 @@ class Separator
     @group = subgroup.group
   end
 
+
   def separator(student_groups)
     return student_groups unless @group.separation_detector
     until "pass" == conflict_info = separation_finder(student_groups)
@@ -27,14 +28,14 @@ class Separator
   def student_switcher(student_groups, conflict_info)
     if @group.separations.size == 3
       case conflict_info[0]
-      when 1 
+      when 1
         i=[2, 3].sample
       when 2
         i=[1, 3].sample
       else
         i=[1, 2].sample
       end
-    else 
+    else
       conflict_info[0] == 1 ? i=2 : i=1
     end
     rand_student = conflict_info[1].sample
